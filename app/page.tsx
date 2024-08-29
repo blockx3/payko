@@ -1,5 +1,11 @@
+import LoginButton from "@/components/LoginButton";
+
 function Main() {
-  return <div>home page</div>;
+  return (
+    <div>
+      <LoginButton />
+    </div>
+  );
 }
 
 export default Main;
