@@ -8,7 +8,7 @@ export default {
   callbacks: {
     authorized: async ({ auth, request: { nextUrl } }) => {
       const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith("/dashboard");
+      const isOnDashboard = nextUrl.pathname.startsWith("/user");
       if (isOnDashboard) {
         if (isLoggedIn) {
           return true;
