@@ -1,11 +1,7 @@
 import LoginButton from "@/components/LoginButton";
 
 function Main() {
-  return (
-    <div>
-      <LoginButton />
-    </div>
-  );
+  return <div></div>;
 }
 
 export default Main;
