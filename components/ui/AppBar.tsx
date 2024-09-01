@@ -9,15 +9,15 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { auth } from "@/auth";
-
+import Image from "next/image";
+import LOGO from "@/app/assets/logo.svg";
 export default async function AppBar() {
   const user = await auth();
   return (
     <header className="flex h-16 w-full items-center justify-between bg-background px-4 md:px-6">
       <div className="flex items-center gap-2">
-        <Link href="#" className="flex items-center gap-2" prefetch={false}>
-          <PowerIcon className="h-6 w-6" />
-          <span className="text-lg font-bold hidden sm:block">Logo</span>
+        <Link href="/" className="flex items-center gap-2" prefetch={false}>
+          <Image src={LOGO} alt="Logo" className="w-20" />
         </Link>
       </div>
       <nav className="hidden items-center gap-4 md:flex">
@@ -52,7 +52,9 @@ export default async function AppBar() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <Link href={"/user/profile"}>
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+            </Link>
             <DropdownMenuItem>Place Holder</DropdownMenuItem>
             <DropdownMenuItem>Place Holder</DropdownMenuItem>
           </DropdownMenuContent>

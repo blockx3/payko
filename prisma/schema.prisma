@@ -19,14 +19,14 @@ model User {
   email         String?         @unique
   emailVerified DateTime?
   image         String?
-  premium       Boolean         @default(false)
   accounts      Account[]
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  UserWallet UserWallet[]
 }
 
 model Account {
@@ -82,4 +82,19 @@ model Authenticator {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, credentialID])
+}
+
+enum Chain {
+  SOLANA
+}
+
+model UserWallet {
+  id         String   @id @default(cuid()) // Wallet ID    
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  chain      Chain
+  publicKey  String
+  privateKey String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
