@@ -10,7 +10,7 @@ function WalletActions() {
         Send
       </Link>
       <Link
-        href="#"
+        href="withdraw"
         className="py-1 px-6 bg-sky-400 text-white rounded-lg hover:shadow-lg"
       >
         Withdraw
@@ -20,12 +20,6 @@ function WalletActions() {
         className="py-1 px-6 bg-sky-400 text-white rounded-lg hover:shadow-lg"
       >
         Swap
-      </Link>
-      <Link
-        href="#"
-        className="py-1 px-6 bg-sky-400 text-white rounded-lg hover:shadow-lg"
-      >
-        Show Address
       </Link>
     </div>
   );
