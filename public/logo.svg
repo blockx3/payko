@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   sodipodi:docname="logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.93083979"
+     inkscape:cx="253.5345"
+     inkscape:cy="306.17514"
+     inkscape:window-width="1536"
+     inkscape:window-height="929"
+     inkscape:window-x="0"
+     inkscape:window-y="31"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect2"
+       style="fill:#214478;stroke-width:4.84345;stroke-linecap:round;stroke-linejoin:round"
+       d="m 25.800037,160.59404 v 21.15604 H 135.5922 a 14.530354,14.530354 0 0 1 14.53034,14.53035 14.530354,14.530354 0 0 1 -13.56923,14.37806 v 0.24311 a 94.689476,94.689476 0 0 0 -94.655423,94.68759 h 12.239175 9.798529 a 72.651772,72.651772 0 0 1 9.883669,-36.10642 72.651772,72.651772 0 0 1 62.73405,-36.0648 72.651772,72.651772 0 0 1 2.29591,-0.17216 36.325886,36.325886 0 0 0 36.32589,-36.32588 36.325886,36.325886 0 0 0 -36.32589,-36.32589 H 135.5922 56.43203 Z" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:135.817px;font-family:'URW Gothic';-inkscape-font-specification:'URW Gothic Semi-Bold';text-align:center;text-anchor:middle;fill:#214478;stroke-width:4.18038;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       x="325.32513"
+       y="314.76248"
+       id="text5"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         x="325.32513"
+         y="314.76248"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:135.817px;font-family:'URW Gothic';-inkscape-font-specification:'URW Gothic Semi-Bold';stroke-width:4.18038">ayko</tspan></text>
+    <path
+       id="rect2-2"
+       style="fill:#ffcc00;stroke-width:4.84345;stroke-linecap:round;stroke-linejoin:round"
+       d="m 33.865361,169.08218 v 21.15604 H 143.65752 a 14.530354,14.530354 0 0 1 14.53035,14.53035 14.530354,14.530354 0 0 1 -13.56923,14.37806 v 0.24311 a 94.689476,94.689476 0 0 0 -94.655429,94.68759 h 12.239175 9.798529 a 72.651772,72.651772 0 0 1 9.883661,-36.10642 72.651772,72.651772 0 0 1 62.734064,-36.0648 72.651772,72.651772 0 0 1 2.29591,-0.17216 36.325886,36.325886 0 0 0 36.32588,-36.32589 36.325886,36.325886 0 0 0 -36.32588,-36.32588 h -3.25703 -79.160167 z" />
+  </g>
+</svg>

@@ -5,18 +5,20 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { auth } from "@/auth";
 import Image from "next/image";
 import LOGO from "@/app/assets/logo.svg";
+import LogoutButton from "../LogoutButton";
 export default async function AppBar() {
   const user = await auth();
   return (
     <header className="flex h-16 w-full items-center justify-between bg-background px-4 md:px-6">
       <div className="flex items-center gap-2">
-        <Link href="/" className="flex items-center gap-2" prefetch={false}>
+        <Link href="/" className="flex items-center gap-2">
           <Image src={LOGO} alt="Logo" className="w-20" />
         </Link>
       </div>
@@ -56,7 +58,9 @@ export default async function AppBar() {
               <DropdownMenuItem>Profile</DropdownMenuItem>
             </Link>
             <DropdownMenuItem>Place Holder</DropdownMenuItem>
-            <DropdownMenuItem>Place Holder</DropdownMenuItem>
+            {/* <DropdownMenuItem> */}
+            <LogoutButton />
+            {/* </DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
         <Sheet>
