@@ -2,6 +2,9 @@ import { auth } from "@/auth";
 import { AvatarFallback, AvatarImage, Avatar } from "@radix-ui/react-avatar";
 import WalletActions from "./WalletActions";
 import { UserWalletCheckPipe } from "@/lib/Pipes";
+import { UserTotalBalance } from "./UserInfo";
+import { Suspense } from "react";
+import CircleLoading from "@/components/ui/CircleLoading/CircleLoading";
 
 async function UserLayout({ children }: { children: React.ReactNode }) {
   const user = await auth();
@@ -28,9 +31,12 @@ async function UserLayout({ children }: { children: React.ReactNode }) {
           </div>
           <div className="mt-4">
             <div className="text-lg">Total Balance</div>
-            <div className="text-4xl ">
-              ${250} <span className="text-lg">USD</span>
-            </div>
+            <Suspense fallback={<CircleLoading />}>
+              <UserTotalBalance
+                email={user?.user?.email as string}
+                chain="SOLANA"
+              />
+            </Suspense>
           </div>
           <WalletActions />
           <div className="border-b-2 border-slate-500 rounded-full my-3" />

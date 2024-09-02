@@ -7,7 +7,7 @@ function LoginButton() {
   return (
     <Button
       onClick={() => {
-        signIn(undefined, { callbackUrl: "/mywallet" });
+        signIn(undefined, { callbackUrl: "/user/wallet" });
       }}
       className="text-lg"
     >

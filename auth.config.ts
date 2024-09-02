@@ -18,8 +18,7 @@ export default {
       return true;
     },
   },
-  // theme: {
-  //   // TODO: Add your logo here
-  //   logo: "logo_url",
-  // },
+  theme: {
+    logo: "/logo.svg",
+  },
 } satisfies NextAuthConfig;

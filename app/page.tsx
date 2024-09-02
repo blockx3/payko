@@ -1,6 +1,4 @@
-import LoginButton from "@/components/LoginButton";
-
-function Main() {
+async function Main() {
   return <div></div>;
 }
 
