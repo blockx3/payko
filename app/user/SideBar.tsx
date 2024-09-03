@@ -1,0 +1,33 @@
+"use client";
+import { CircleUserRoundIcon, WalletIcon } from "lucide-react";
+import Link from "next/link";
+
+function SideBar() {
+  return (
+    <div className="">
+      <div
+        className="px-1 pt-2 bg-white w-60"
+        style={{
+          height: "calc(100vh - 64px)",
+        }}
+      >
+        <Link
+          href="/user/profile"
+          className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group "
+        >
+          <CircleUserRoundIcon className="group-hover:opacity-100 opacity-50" />
+          <span className="flex-1 ms-3 whitespace-nowrap">Profile</span>
+        </Link>
+        <Link
+          href="/user/wallet/send"
+          className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group "
+        >
+          <WalletIcon className="group-hover:opacity-100 opacity-50" />
+          <span className="flex-1 ms-3 whitespace-nowrap">Wallet</span>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+export default SideBar;
