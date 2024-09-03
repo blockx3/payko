@@ -77,14 +77,6 @@ export default async function AppBar() {
             <nav className="grid gap-6 text-lg font-medium">
               <Link
                 href="#"
-                className="flex items-center gap-2"
-                prefetch={false}
-              >
-                <PowerIcon className="h-6 w-6" />
-                <span className="text-lg font-bold">LOGO</span>
-              </Link>
-              <Link
-                href="#"
                 className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
               >
                 Home

@@ -4,14 +4,13 @@ import WalletActions from "./WalletActions";
 import { UserWalletCheckPipe } from "@/lib/Pipes";
 import { UserTotalBalance } from "./UserInfo";
 import { Suspense } from "react";
-import CircleLoading from "@/components/ui/CircleLoading/CircleLoading";
 
 async function UserLayout({ children }: { children: React.ReactNode }) {
   const user = await auth();
   return (
     <UserWalletCheckPipe>
       <div
-        className="flex bg-slate-100 items-center"
+        className="flex items-center"
         style={{
           height: "calc(100vh - 64px)",
         }}
@@ -31,7 +30,15 @@ async function UserLayout({ children }: { children: React.ReactNode }) {
           </div>
           <div className="mt-4">
             <div className="text-lg">Total Balance</div>
-            <Suspense fallback={<CircleLoading />}>
+            <Suspense
+              fallback={
+                <div className="flex flex-row gap-2 items-center h-10">
+                  <div className="w-4 h-4 rounded-full bg-blue-500 animate-bounce [animation-delay:.7s]"></div>
+                  <div className="w-4 h-4 rounded-full bg-blue-500 animate-bounce [animation-delay:.3s]"></div>
+                  <div className="w-4 h-4 rounded-full bg-blue-500 animate-bounce [animation-delay:.7s]"></div>
+                </div>
+              }
+            >
               <UserTotalBalance
                 email={user?.user?.email as string}
                 chain="SOLANA"

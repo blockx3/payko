@@ -10,6 +10,7 @@ async function main() {
         symbol: "SOL",
         decimal: 0,
         token_mint: "NATIVE",
+        imageUrl: "https://cryptologos.cc/logos/solana-sol-logo.svg?v=033",
       },
       {
         chain: "SOLANA",
@@ -17,6 +18,7 @@ async function main() {
         symbol: "USDC",
         decimal: 6,
         token_mint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+        imageUrl: "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg?v=033",
       },
       {
         chain: "SOLANA",
@@ -24,6 +26,7 @@ async function main() {
         symbol: "USDT",
         decimal: 6,
         token_mint: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+        imageUrl: "https://cryptologos.cc/logos/tether-usdt-logo.svg?v=033",
       },
     ],
   });
