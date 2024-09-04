@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 
 function SendForm() {
   return (
-    <form className="flex flex-col gap-4">
+    <form className="flex flex-col gap-4 ">
       <div>
         <label htmlFor="WalletAddr">Wallet Address</label>
         <Input id="WalletAddr" />

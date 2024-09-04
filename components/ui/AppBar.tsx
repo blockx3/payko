@@ -13,6 +13,7 @@ import { auth } from "@/auth";
 import Image from "next/image";
 import LOGO from "@/app/assets/logo.svg";
 import LogoutButton from "../LogoutButton";
+import { CircleUserRoundIcon, WalletIcon } from "lucide-react";
 export default async function AppBar() {
   const user = await auth();
   return (
@@ -44,25 +45,27 @@ export default async function AppBar() {
         </Link>
       </nav>
       <div className="flex gap-1">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <Avatar className="h-10 w-10 bg-[#333]">
-                <AvatarImage src={user?.user?.image as string} />
-                <AvatarFallback>U</AvatarFallback>
-              </Avatar>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <Link href={"/user/profile"}>
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-            </Link>
-            <DropdownMenuItem>Place Holder</DropdownMenuItem>
-            {/* <DropdownMenuItem> */}
-            <LogoutButton />
-            {/* </DropdownMenuItem> */}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="hidden xl:block">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <Avatar className="h-10 w-10 bg-[#333]">
+                  <AvatarImage src={user?.user?.image as string} />
+                  <AvatarFallback>U</AvatarFallback>
+                </Avatar>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <Link href={"/user/profile"}>
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+              </Link>
+              <DropdownMenuItem>Place Holder</DropdownMenuItem>
+              {/* <DropdownMenuItem> */}
+              <LogoutButton />
+              {/* </DropdownMenuItem> */}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -74,26 +77,51 @@ export default async function AppBar() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="sm:max-w-xs">
-            <nav className="grid gap-6 text-lg font-medium">
-              <Link
-                href="#"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                Home
-              </Link>
-              <Link
-                href="/user/wallet"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                Wallet
-              </Link>
-              <Link
-                href="#"
-                target="_blank"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                GitHub
-              </Link>
+            <nav className="grid xl:gap-6 gap-2 text-lg py-2 font-medium">
+              <div className="flex flex-col gap-3">
+                <div className="flex gap-2">
+                  <Avatar className="h-10 w-10 bg-[#333]">
+                    <AvatarImage src={user?.user?.image as string} />
+                    <AvatarFallback>U</AvatarFallback>
+                  </Avatar>
+                  <LogoutButton />
+                </div>
+                <div className="flex justify-between">
+                  <SheetTrigger asChild>
+                    <Link
+                      href="/"
+                      className="flex underline underline-offset-2 items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                    >
+                      Home
+                    </Link>
+                  </SheetTrigger>
+                  <Link
+                    href="#"
+                    target="_blank"
+                    className="flex underline underline-offset-2 items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  >
+                    GitHub
+                  </Link>
+                </div>
+              </div>
+              <SheetTrigger asChild>
+                <Link
+                  href="/user/profile"
+                  className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group "
+                >
+                  <CircleUserRoundIcon className="group-hover:opacity-100 opacity-50" />
+                  <span className="flex-1 ms-3 whitespace-nowrap">Profile</span>
+                </Link>
+              </SheetTrigger>
+              <SheetTrigger asChild>
+                <Link
+                  href="/user/wallet/send"
+                  className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group "
+                >
+                  <WalletIcon className="group-hover:opacity-100 opacity-50" />
+                  <span className="flex-1 ms-3 whitespace-nowrap">Wallet</span>
+                </Link>
+              </SheetTrigger>
             </nav>
           </SheetContent>
         </Sheet>

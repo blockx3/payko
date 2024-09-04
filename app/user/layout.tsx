@@ -5,7 +5,7 @@ function UserLayout({ children }: { children: React.ReactNode }) {
     <div
       className="flex bg-slate-100"
       style={{
-        height: "calc(100vh - 64px)",
+        minHeight: "calc(100vh - 64px)",
       }}
     >
       <SideBar />
