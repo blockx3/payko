@@ -18,16 +18,22 @@
     "@solana/spl-token": "^0.4.8",
     "@solana/web3.js": "^1.95.3",
     "@types/bs58": "^4.0.4",
+    "@types/pbkdf2": "^3.1.2",
     "bs58": "^6.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.5.0",
+    "input-otp": "^1.2.4",
     "lucide-react": "^0.436.0",
     "next": "14.2.7",
     "next-auth": "^5.0.0-beta.20",
+    "pbkdf2": "^3.1.2",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "tweetnacl": "^1.0.3",
+    "tweetnacl-ts": "^1.0.3"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed/seed.ts"
