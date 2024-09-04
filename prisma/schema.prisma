@@ -27,6 +27,7 @@ model User {
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
   UserWallet UserWallet[]
+  initalized Boolean      @default(false)
 }
 
 model Account {
@@ -89,14 +90,16 @@ enum Chain {
 }
 
 model UserWallet {
-  id         String   @id @default(cuid()) // Wallet ID    
-  userId     String
-  user       User     @relation(fields: [userId], references: [id])
-  chain      Chain
-  publicKey  String
-  privateKey String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id                   String   @id @default(cuid()) // Wallet ID    
+  userId               String
+  user                 User     @relation(fields: [userId], references: [id])
+  chain                Chain
+  publicKey            String
+  privateKey           String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  salt_for_pin         String?
+  nonce_for_encryption String?
 }
 
 model SupportedTokens {
