@@ -20,7 +20,7 @@ async function WelcomeInit() {
         <div className="flex flex-col items-center">
           <AnimatedText text="Welcome ✨" type="calmInUp" />
         </div>
-        {userDB?.UserWallet ? <AlreadyCreadted /> : <CreatePinForm />}
+        {userDB?.initalized ? <AlreadyCreadted /> : <CreatePinForm />}
       </div>
     </div>
   );
