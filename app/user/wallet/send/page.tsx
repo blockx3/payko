@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import SendForm from "./SendForm";
 import UserAvailableToken from "./UserTokensList";
 import { Suspense } from "react";
-
+import { ToastContainer, Bounce } from "react-toastify";
 async function WalletSend() {
   const user = await auth();
   return (
@@ -41,6 +41,19 @@ async function WalletSend() {
             chain="SOLANA"
           />
         </Suspense>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={500}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Bounce}
+        />
       </div>
     </>
   );
