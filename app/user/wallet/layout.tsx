@@ -3,9 +3,18 @@ import { AvatarFallback, AvatarImage, Avatar } from "@radix-ui/react-avatar";
 import WalletActions from "./WalletActions";
 import { UserTotalBalance } from "./UserInfo";
 import { Suspense } from "react";
+import prisma from "@/lib/db";
 
 async function UserLayout({ children }: { children: React.ReactNode }) {
   const user = await auth();
+  const userDB = await prisma.user.findUnique({
+    where: {
+      email: user?.user?.email as string,
+    },
+    include: {
+      UserWallet: true,
+    },
+  });
   return (
     <div
       className="flex xl:items-center"
@@ -44,7 +53,9 @@ async function UserLayout({ children }: { children: React.ReactNode }) {
               />
             </Suspense>
           </div>
-          <WalletActions />
+          <WalletActions
+            publickey={userDB?.UserWallet[0].publicKey as string}
+          />
           <div className="border-b-2 border-slate-500 rounded-full xl:my-3 my-1" />
         </div>
         <div className="flex flex-col gap-2">{children}</div>
