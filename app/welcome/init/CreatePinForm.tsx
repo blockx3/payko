@@ -1,5 +1,5 @@
 "use client";
-import { CreateUserWallet } from "@/app/actions/DBActions";
+import { CreateUserWallet } from "@/app/actions/database";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 

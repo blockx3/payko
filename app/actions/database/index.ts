@@ -1,13 +1,34 @@
 "use server";
+/*
+
+IMPORTANT: 
+This file contains Nextjs Actions function 
+which exposes POST endpoint in the APP
+any exported async function is a POST endpoint
+so while writing any more action function remember 
+to check auth() before executing any action
+
+This is the function to check auth()
+write it at very first lines of function starting
+
+const session = await auth();
+  if (!session) {
+    return {
+      success: false,
+      message: "Unauthorized",
+    };
+  }
+
+*/
+
 import nacl from "tweetnacl";
 import { pbkdf2Sync } from "pbkdf2";
 import { $Enums } from "@prisma/client";
 import { Keypair } from "@solana/web3.js";
 import prisma from "@/lib/db";
 import { SecretBoxLength } from "@/lib/constents";
+import { auth } from "@/auth";
 
-// TODO: add check to create single wallet for user
-// TODO: add authontication check in actions
 export async function CreateUserWallet({
   pin,
   email,
@@ -17,9 +38,28 @@ export async function CreateUserWallet({
   email: string;
   chain: $Enums.Chain;
 }) {
-  // encrypt the wallet private key with the pin and store it
-  // private key storing logic for now its just store in DB
+  const session = await auth();
+  if (!session) {
+    return {
+      success: false,
+      message: "Unauthorized",
+    };
+  }
   try {
+    const userDB = await prisma.user.findUnique({
+      where: {
+        email: email,
+      },
+      include: {
+        UserWallet: true,
+      },
+    });
+    if (userDB?.UserWallet.length != 0) {
+      return {
+        success: false,
+        message: "Wallet already created",
+      };
+    }
     const keypair = Keypair.generate();
     const getSalt = nacl.randomBytes(16);
     const key = pbkdf2Sync(pin, getSalt, 100000, SecretBoxLength.Key, "sha512");
@@ -30,11 +70,6 @@ export async function CreateUserWallet({
       nonce,
       key
     );
-    const userDB = await prisma.user.findUnique({
-      where: {
-        email: email,
-      },
-    });
     await prisma.$transaction([
       prisma.userWallet.create({
         data: {
