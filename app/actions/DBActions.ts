@@ -6,6 +6,8 @@ import { Keypair } from "@solana/web3.js";
 import prisma from "@/lib/db";
 import { SecretBoxLength } from "@/lib/constents";
 
+// TODO: add check to create single wallet for user
+// TODO: add authontication check in actions
 export async function CreateUserWallet({
   pin,
   email,

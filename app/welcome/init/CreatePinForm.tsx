@@ -13,8 +13,10 @@ import { Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function CreatePinForm() {
+  const router = useRouter();
   const [pin, setPin] = useState("");
   const session = useSession();
   const [loading, setLoading] = useState(false);
@@ -27,6 +29,7 @@ function CreatePinForm() {
     });
     alert(res.message);
     setLoading(false);
+    router.push("/user/wallet/send");
   }
 
   return (
