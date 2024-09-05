@@ -6,10 +6,11 @@ export default {
   providers: [google],
   trustHost: true,
   callbacks: {
+    // this function runs on each and every request according to the matcher in middleware file
     authorized: async ({ auth, request: { nextUrl } }) => {
       const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith("/user");
-      if (isOnDashboard) {
+      const isOnUser = nextUrl.pathname.startsWith("/user");
+      if (isOnUser) {
         if (isLoggedIn) {
           return true;
         }
