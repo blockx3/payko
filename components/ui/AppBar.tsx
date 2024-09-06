@@ -23,6 +23,8 @@ export default async function AppBar() {
             src={"https://static.aaraz.me/payko/logo.svg"}
             alt="Logo"
             className="w-20"
+            height={1000} // Arbitrary height
+            width={1000} // Arbitrary width
           />
         </Link>
       </div>
