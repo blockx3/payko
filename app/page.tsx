@@ -6,6 +6,8 @@ async function Main() {
       <Image
         src="https://static.aaraz.me/payko/abstract_obj.png"
         alt=""
+        height={1000} // Arbitrary height
+        width={1000} // Arbitrary width
         className="absolute xl:top-0 bottom-0 right-0 xl:w-[800px] object-cover -z-10 xl:opacity-100 opacity-80 rotate-180 xl:rotate-0"
       />
       <div className="h-screen flex flex-col xl:justify-center pt-10 xl:pt-0">
@@ -14,6 +16,8 @@ async function Main() {
             <Image
               src="https://static.aaraz.me/payko/p.png"
               alt=""
+              height={1000} // Arbitrary height
+              width={1000} // Arbitrary width
               className="xl:h-[7rem] xl:w-[6rem] h-16 w-16"
             />
             <div>ay-Ko</div>
