@@ -1,6 +1,7 @@
 import { $Enums } from "@prisma/client";
 import { getUserAvailableTokens } from "../UserInfo";
 import Image from "next/image";
+import { MotionDiv } from "@/lib/UseClientUIs";
 
 async function UserAvailableToken({
   email,
@@ -14,7 +15,16 @@ async function UserAvailableToken({
     chain: chain,
   });
   return (
-    <div className="flex flex-col gap-2 mt-4">
+    <MotionDiv
+      className="flex flex-col gap-2 mt-4"
+      initial={{ y: 100 }}
+      animate={{ y: 0 }}
+      transition={{
+        duration: 0.2,
+        delay: 0,
+        ease: [0, 0, 0, 0],
+      }}
+    >
       {availableTokens.map((token) => {
         return (
           <div
@@ -35,7 +45,7 @@ async function UserAvailableToken({
           </div>
         );
       })}
-    </div>
+    </MotionDiv>
   );
 }
 
