@@ -20,7 +20,6 @@ export async function getUserWalletKeypair({
   chain: $Enums.Chain;
   pin: string;
 }): Promise<Keypair | null> {
-  console.log(email, chain, pin);
   const user = await prisma.user.findFirst({
     where: {
       email: email,

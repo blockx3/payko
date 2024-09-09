@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.popout-button {
+.popout-button-black .popout-button-yellow {
+
   position: relative;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -11,10 +12,15 @@
     box-shadow 0.1s ease;
 }
 
-.popout-button:hover {
+.popout-button-black:hover {
   transform: translateY(-5px);
   box-shadow: -5px 5px 0px 0px rgba(0, 0, 0, 1);
 }
+.popout-button-yellow:hover {
+  transform: translateY(-5px);
+  box-shadow: -5px 5px 0px 0px rgb(233, 198, 0);
+}
+
 
 @layer base {
   :root {
