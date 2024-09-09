@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Bounce, toast } from "react-toastify";
 import { Input } from "@/components/ui/input";
+import { X } from "lucide-react";
 
 function WalletActions({ publickey }: { publickey: string }) {
   return (
@@ -40,8 +41,11 @@ function WalletActions({ publickey }: { publickey: string }) {
           Wallet Address
         </AlertDialogTrigger>
         <AlertDialogContent>
-          <AlertDialogHeader>
+          <AlertDialogHeader className="flex flex-row items-center justify-between">
             <AlertDialogTitle>Public Key</AlertDialogTitle>
+            <AlertDialogCancel>
+              <X />
+            </AlertDialogCancel>
           </AlertDialogHeader>
           <Input
             type="text"

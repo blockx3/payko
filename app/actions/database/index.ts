@@ -24,10 +24,20 @@ const session = await auth();
 import nacl from "tweetnacl";
 import { pbkdf2Sync } from "pbkdf2";
 import { $Enums } from "@prisma/client";
-import { Keypair } from "@solana/web3.js";
+import {
+  Transaction,
+  PublicKey,
+  LAMPORTS_PER_SOL,
+  SystemProgram,
+  sendAndConfirmTransaction,
+  Keypair,
+} from "@solana/web3.js";
+import bs58 from "bs58";
 import prisma from "@/lib/db";
 import { SecretBoxLength } from "@/lib/constents";
 import { auth } from "@/auth";
+import { getUserWalletKeypair } from "@/lib/utils";
+import { conn } from "@/lib/solana";
 
 export async function CreateUserWallet({
   pin,
@@ -101,5 +111,65 @@ export async function CreateUserWallet({
       success: false,
       message: "Error creating wallet",
     };
+  }
+}
+
+export async function SendCrypto({
+  chain,
+  transationPin,
+  amount,
+  to,
+}: {
+  chain: $Enums.Chain;
+  transationPin: string;
+  amount: number;
+  to: string;
+}) {
+  const session = await auth();
+  if (!session) {
+    return {
+      success: false,
+      message: "Unauthorized",
+    };
+  }
+
+  switch (chain) {
+    case $Enums.Chain.SOLANA:
+      const userKeyPair = await getUserWalletKeypair({
+        chain: chain,
+        pin: transationPin,
+        email: session?.user?.email as string,
+      });
+      if (!userKeyPair) {
+        return {
+          success: false,
+          message: "Invalid pin",
+        };
+      }
+      try {
+        const trans = new Transaction();
+        const PubSender = new PublicKey(userKeyPair.publicKey);
+        const PubReceiver = new PublicKey(to);
+        const tranData = SystemProgram.transfer({
+          fromPubkey: PubSender,
+          toPubkey: PubReceiver,
+          lamports: LAMPORTS_PER_SOL * amount,
+        });
+        trans.add(tranData);
+        const transection_hash = await sendAndConfirmTransaction(conn, trans, [
+          userKeyPair,
+        ]);
+        return {
+          success: true,
+          message: transection_hash,
+        };
+      } catch (error) {
+        console.log(error);
+        return {
+          success: false,
+          message: "Error sending transaction",
+        };
+      }
+      break;
   }
 }
