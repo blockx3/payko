@@ -1,0 +1,25 @@
+#!/bin/env bash
+
+available_commands='available_commands: dev, clean, psql, migrate, shell'
+
+if [[ -z "$1" ]]; then
+  echo $available_commands
+fi
+
+export project=$(realpath $(printf $(dirname $(realpath $0))'/..'))
+export user=$(id -u)':'$(id -g)
+
+echo [Project Dir] $project
+echo [User] $user
+
+if [ "$1" == "dev" ]; then
+  docker-compose -f $project/meta/docker/dev.compose.yml up --build
+elif [ "$1" == "clean" ]; then
+  docker-compose -f $project/meta/docker/dev.compose.yml down -v
+elif [ "$1" == "psql" ]; then
+  docker-compose -f $project/meta/docker/dev.compose.yml exec -it postgresql ash -c "PGPASSWORD=password psql -Uuser1 -ddb1"
+else
+  echo
+  echo unknown command
+  echo available commands: $available_commands
+fi
