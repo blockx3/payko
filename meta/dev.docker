@@ -18,6 +18,8 @@ elif [ "$1" == "clean" ]; then
   docker-compose -f $project/meta/docker/dev.compose.yml down -v
 elif [ "$1" == "psql" ]; then
   docker-compose -f $project/meta/docker/dev.compose.yml exec -it postgresql ash -c "PGPASSWORD=password psql -Uuser1 -ddb1"
+elif [ "$1" == "shell" ]; then
+  docker-compose -f $project/meta/docker/dev.compose.yml exec -it web bash
 else
   echo
   echo unknown command
