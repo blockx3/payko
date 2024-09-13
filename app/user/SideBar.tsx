@@ -1,5 +1,9 @@
 "use client";
-import { CircleUserRoundIcon, WalletIcon } from "lucide-react";
+import {
+  ArrowLeftRightIcon,
+  CircleUserRoundIcon,
+  WalletIcon,
+} from "lucide-react";
 import Link from "next/link";
 
 function SideBar() {
@@ -23,6 +27,13 @@ function SideBar() {
       >
         <WalletIcon className="group-hover:opacity-100 opacity-50" />
         <span className="flex-1 ms-3 whitespace-nowrap">Wallet</span>
+      </Link>
+      <Link
+        href="/user/transaction/"
+        className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group "
+      >
+        <ArrowLeftRightIcon className="group-hover:opacity-100 opacity-50" />
+        <span className="flex-1 ms-3 whitespace-nowrap">Transactions</span>
       </Link>
     </div>
   );

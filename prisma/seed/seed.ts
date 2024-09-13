@@ -30,6 +30,94 @@ async function main() {
       },
     ],
   });
+
+  // fake transections , before using these change the userId with a currect user
+  // await prisma.transactions.createMany({
+  //   data: [
+  //     {
+  //       userId: "cm0xz357r0003zfmheog7crei",
+  //       amount: 100,
+  //       chain: "SOLANA",
+  //       transection_type: "NATIVECOIN",
+  //       transaction_signature:
+  //         "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       from: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       to: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //     },
+  //     {
+  //       userId: "cm0xz357r0003zfmheog7crei",
+  //       amount: 100,
+  //       chain: "SOLANA",
+  //       transection_type: "NATIVECOIN",
+  //       transaction_signature:
+  //         "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       from: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       to: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //     },
+  //     {
+  //       userId: "cm0xz357r0003zfmheog7crei",
+  //       amount: 100,
+  //       chain: "SOLANA",
+  //       transection_type: "NFT",
+  //       mint_address:
+  //         "sdsdauubycfkd98d9gsd8gdvvybdiuybd87gdgd9g87vd987d89gds9gv8ds98g7d9g",
+  //       transaction_signature:
+  //         "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       from: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       to: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //     },
+  //     {
+  //       userId: "cm0xz357r0003zfmheog7crei",
+  //       amount: 100,
+  //       chain: "SOLANA",
+  //       transection_type: "NATIVECOIN",
+  //       transaction_signature:
+  //         "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       from: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       to: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //     },
+  //     {
+  //       userId: "cm0xz357r0003zfmheog7crei",
+  //       amount: 100,
+  //       chain: "SOLANA",
+  //       transection_type: "NATIVECOIN",
+  //       transaction_signature:
+  //         "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       from: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       to: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //     },
+  //     {
+  //       userId: "cm0xz357r0003zfmheog7crei",
+  //       amount: 100,
+  //       chain: "SOLANA",
+  //       transection_type: "NATIVECOIN",
+  //       transaction_signature:
+  //         "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       from: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       to: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //     },
+  //     {
+  //       userId: "cm0xz357r0003zfmheog7crei",
+  //       amount: 100,
+  //       chain: "SOLANA",
+  //       transection_type: "NATIVECOIN",
+  //       transaction_signature:
+  //         "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       from: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       to: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //     },
+  //     {
+  //       userId: "cm0xz357r0003zfmheog7crei",
+  //       amount: 100,
+  //       chain: "SOLANA",
+  //       transection_type: "NATIVECOIN",
+  //       transaction_signature:
+  //         "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       from: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //       to: "sdsskjdfsdf7sf87sdf8syfbsufysd87fdssdo8f7sd9f89dv8d98d9f79sfsdd",
+  //     },
+  //   ],
+  // });
 }
 main()
   .then(async () => {

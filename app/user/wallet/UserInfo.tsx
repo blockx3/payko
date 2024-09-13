@@ -99,6 +99,9 @@ export async function getUserAvailableTokens({
   email: string;
   chain: $Enums.Chain;
 }) {
+  if (email == undefined) {
+    return [];
+  }
   const UserDB = await prisma.user.findUnique({
     where: {
       email: email,

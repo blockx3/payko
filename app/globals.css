@@ -3,13 +3,16 @@
 @tailwind utilities;
 
 .popout-button-black .popout-button-yellow {
-
   position: relative;
   border: 1px solid #ccc;
   box-sizing: border-box;
   transition:
     transform 0.1s ease,
     box-shadow 0.1s ease;
+}
+
+.solana-bg {
+  @apply bg-gradient-to-r from-teal-400 to-purple-400;
 }
 
 .popout-button-black:hover {
@@ -20,7 +23,6 @@
   transform: translateY(-5px);
   box-shadow: -5px 5px 0px 0px rgb(233, 198, 0);
 }
-
 
 @layer base {
   :root {

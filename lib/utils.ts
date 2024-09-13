@@ -56,3 +56,46 @@ export async function getUserWalletKeypair({
   const UserWalletKeypair = Keypair.fromSecretKey(decryptedPrivateKey);
   return UserWalletKeypair;
 }
+
+export async function CreateTransaction({
+  to,
+  from,
+  amount,
+  chain,
+  userId,
+  transactionType,
+  transactionSignature,
+}: {
+  to: string;
+  from: string;
+  amount: number;
+  chain: $Enums.Chain;
+  userId: string;
+  transactionType: $Enums.transaction_type;
+  transactionSignature: string;
+}) {
+  try {
+    return await prisma.transactions.create({
+      data: {
+        transection_type: transactionType,
+        transaction_signature: transactionSignature,
+        to: to,
+        from: from,
+        chain: chain,
+        amount: amount,
+        userId: userId,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function getDBuser(email: string) {
+  return await prisma.user.findFirst({
+    where: {
+      email: email,
+    },
+  });
+}

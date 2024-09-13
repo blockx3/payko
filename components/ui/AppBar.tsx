@@ -28,23 +28,23 @@ export default async function AppBar() {
           />
         </Link>
       </div>
-      <nav className="hidden items-center gap-4 md:flex">
+      <nav className="hidden text-base items-center gap-4 md:flex">
         <Link
           href="/"
-          className="text-sm font-medium text-muted-foreground hover:text-foreground"
+          className="font-medium text-muted-foreground hover:text-foreground"
         >
           Home
         </Link>
         <Link
           href="/user/wallet"
-          className="text-sm font-medium text-muted-foreground hover:text-foreground"
+          className="font-medium text-muted-foreground hover:text-foreground"
         >
           Wallet
         </Link>
         <Link
           href="https://github.com/blockx3/payko"
           target="_blank"
-          className="text-sm font-medium text-muted-foreground hover:text-foreground"
+          className="font-medium text-muted-foreground hover:text-foreground"
         >
           GitHub
         </Link>
