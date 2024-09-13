@@ -1,0 +1,23 @@
+services:
+  web:
+    user: ${user:-1000:1000}
+    build:
+      context: .
+      dockerfile: ./dev.dockerfile
+    environment:
+      - DATABASE_URL=postgresql://user1:password@postgresql:5432/db1
+    volumes:
+      - ${project:-.}:/app
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - postgresql
+
+  postgresql:
+    image: "postgres:16.3-alpine3.20"
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      - POSTGRES_USER=user1
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db1
