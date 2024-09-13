@@ -36,7 +36,11 @@ import bs58 from "bs58";
 import prisma from "@/lib/db";
 import { SecretBoxLength } from "@/lib/constents";
 import { auth } from "@/auth";
-import { getUserWalletKeypair } from "@/lib/utils";
+import {
+  CreateTransaction,
+  getDBuser,
+  getUserWalletKeypair,
+} from "@/lib/utils";
 import { conn } from "@/lib/solana";
 
 export async function CreateUserWallet({
@@ -147,6 +151,7 @@ export async function SendCrypto({
         };
       }
       try {
+        const userDb = await getDBuser(session.user?.email as string);
         const trans = new Transaction();
         const PubSender = new PublicKey(userKeyPair.publicKey);
         const PubReceiver = new PublicKey(to);
@@ -159,6 +164,15 @@ export async function SendCrypto({
         const transection_hash = await sendAndConfirmTransaction(conn, trans, [
           userKeyPair,
         ]);
+        await CreateTransaction({
+          to: to,
+          from: PubSender.toString(),
+          amount: amount,
+          chain: chain,
+          userId: userDb?.id as string,
+          transactionType: $Enums.transaction_type.NATIVECOIN,
+          transactionSignature: transection_hash,
+        });
         return {
           success: true,
           message: transection_hash,

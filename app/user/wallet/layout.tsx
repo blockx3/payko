@@ -54,9 +54,9 @@ async function UserLayout({ children }: { children: React.ReactNode }) {
             </Suspense>
           </div>
           <WalletActions
-            publickey={userDB?.UserWallet[0].publicKey as string}
+            publickey={userDB?.UserWallet[0]?.publicKey as string}
           />
-          <div className="border-b-2 border-slate-500 rounded-full xl:my-3 my-1" />
+          <div className="border-b-2 border-slate-300 rounded-full xl:my-3 my-2" />
         </div>
         <div className="flex flex-col gap-2">{children}</div>
       </div>

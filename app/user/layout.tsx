@@ -24,7 +24,7 @@ async function UserLayout({ children }: { children: React.ReactNode }) {
         }}
       >
         <SideBar />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 bg-white">{children}</div>
       </div>
     </>
   );

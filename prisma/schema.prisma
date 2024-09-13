@@ -24,10 +24,11 @@ model User {
   // Optional for WebAuthn support
   Authenticator Authenticator[]
 
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  UserWallet UserWallet[]
-  initalized Boolean      @default(false)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  UserWallet   UserWallet[]
+  initalized   Boolean        @default(false)
+  transactions transactions[]
 }
 
 model Account {
@@ -112,4 +113,23 @@ model SupportedTokens {
   imageUrl   String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+
+enum transaction_type {
+  NFT
+  NATIVECOIN
+  TOKEN
+}
+
+model transactions {
+  id                    String           @id @default(cuid())
+  userId                String
+  user                  User             @relation(fields: [userId], references: [id])
+  chain                 Chain
+  transection_type      transaction_type
+  mint_address          String?
+  from                  String
+  to                    String
+  amount                Float
+  transaction_signature String
 }
