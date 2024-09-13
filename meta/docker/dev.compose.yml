@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: ./dev.dockerfile
-    environment:
-      - DATABASE_URL=postgresql://user1:password@postgresql:5432/db1
     volumes:
       - ${project:-.}:/app
     ports:

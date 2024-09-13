@@ -13,6 +13,7 @@ echo [Project Dir] $project
 echo [User] $user
 
 if [ "$1" == "dev" ]; then
+  if [[ ! -e "$project/.env" ]]; then cp $project/.env.example $project/.env; fi
   docker-compose -f $project/meta/docker/dev.compose.yml up --build
 elif [ "$1" == "clean" ]; then
   docker-compose -f $project/meta/docker/dev.compose.yml down -v
