@@ -37,3 +37,7 @@ yarn-error.log*
 next-env.d.ts
 /prisma/migrations/*
 .pnpm-store/v3/files
+
+# lockfiles
+yarn.lock
+package-lock.json
