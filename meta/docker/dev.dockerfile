@@ -4,7 +4,4 @@ RUN npm install pnpm -g
 
 WORKDIR /app
 
-CMD  id && \
-  pnpm install && \
-  pnpm dlx prisma migrate dev --name init && \
-  pnpm dev
+CMD bash meta/docker/dev.run.sh 

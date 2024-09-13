@@ -20,6 +20,22 @@ elif [ "$1" == "psql" ]; then
   docker-compose -f $project/meta/docker/dev.compose.yml exec -it postgresql ash -c "PGPASSWORD=password psql -Uuser1 -ddb1"
 elif [ "$1" == "shell" ]; then
   docker-compose -f $project/meta/docker/dev.compose.yml exec -it web bash
+elif [ "$1" == "migrate" ]; then
+  _name=""
+  if [[ -n $2 ]]; then
+    _name=$2
+  else
+    migration_dir=$project/prisma/migrations
+    _name=$(find $migration_dir -not -path $migration_dir -type d | xargs -n 1 basename | awk -F '_' 'END {print $2}')
+  fi
+
+  echo [migrating] name: $_name
+
+  if [[ "$_name" != ""  ]]; then  
+    _name=" --name "$_name
+  fi
+
+  docker-compose -f $project/meta/docker/dev.compose.yml exec -it web bash -c "pnpm dlx prisma migrate dev "$name
 else
   echo
   echo unknown command
