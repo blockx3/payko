@@ -10,6 +10,7 @@
     "docker-dev": "bash ./meta/dev.docker dev",
     "docker-clean": "bash ./meta/dev.docker clean",
     "docker-psql": "bash ./meta/dev.docker psql",
+    "docker-shell": "bash ./meta/dev.docker shell",
     "docker-migrate": "bash ./meta/dev.docker migrate"
   },
   "dependencies": {
