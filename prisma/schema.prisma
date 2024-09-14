@@ -16,6 +16,7 @@ datasource db {
 model User {
   id            String          @id @default(cuid())
   name          String?
+  nickname      String?
   email         String?         @unique
   emailVerified DateTime?
   image         String?
@@ -92,6 +93,7 @@ enum Chain {
 
 model UserWallet {
   id                   String   @id @default(cuid()) // Wallet ID    
+  walletname           String?
   userId               String
   user                 User     @relation(fields: [userId], references: [id])
   chain                Chain

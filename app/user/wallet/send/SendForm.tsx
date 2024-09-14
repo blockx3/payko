@@ -45,7 +45,7 @@ function SendForm() {
       transationPin: pin,
     });
     if (res.success) {
-      setError("Transaction Successful");
+      setError("Transaction Successful: Reload to see");
       setLoading(false);
       setPin("");
       return;

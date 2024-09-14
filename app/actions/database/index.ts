@@ -42,6 +42,12 @@ import {
   getUserWalletKeypair,
 } from "@/lib/utils";
 import { conn } from "@/lib/solana";
+import {
+  uniqueNamesGenerator,
+  adjectives,
+  colors,
+  animals,
+} from "unique-names-generator";
 
 export async function CreateUserWallet({
   pin,
@@ -68,6 +74,11 @@ export async function CreateUserWallet({
         UserWallet: true,
       },
     });
+    const randomNickName = uniqueNamesGenerator({
+      dictionaries: [adjectives, colors, animals],
+      length: 2,
+      separator: "-",
+    });
     if (userDB?.UserWallet.length != 0) {
       return {
         success: false,
@@ -89,6 +100,7 @@ export async function CreateUserWallet({
         data: {
           userId: userDB?.id as string,
           chain: chain,
+          walletname: "Main",
           publicKey: keypair.publicKey.toString(),
           privateKey: encryptedPrivateKey.toString(),
           salt_for_pin: getSalt.toString(),
@@ -100,6 +112,7 @@ export async function CreateUserWallet({
           email: email,
         },
         data: {
+          nickname: randomNickName,
           initalized: true,
         },
       }),
@@ -185,5 +198,42 @@ export async function SendCrypto({
         };
       }
       break;
+  }
+}
+
+export async function UpdateNickName({
+  email,
+  nickname,
+}: {
+  email: string;
+  nickname: string;
+}) {
+  const session = await auth();
+  if (!session) {
+    return {
+      success: false,
+      message: "Unauthorized",
+    };
+  }
+  console.log("updated nicname");
+  try {
+    await prisma.user.update({
+      where: {
+        email: email,
+      },
+      data: {
+        nickname: nickname,
+      },
+    });
+    return {
+      success: true,
+      message: "NickName updated",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "Error updating nickname",
+    };
   }
 }

@@ -9,7 +9,7 @@ import Link from "next/link";
 function SideBar() {
   return (
     <div
-      className="px-1 pt-2 bg-white w-48 xl:w-60 hidden lg:block"
+      className="px-1 pt-2 bg-white w-48 xl:w-60 hidden lg:block border-r-2"
       style={{
         height: "calc(100vh - 64px)",
       }}

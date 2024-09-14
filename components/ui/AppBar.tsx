@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -9,12 +10,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
-import { auth } from "@/auth";
 import Image from "next/image";
 import LogoutButton from "../LogoutButton";
 import { CircleUserRoundIcon, WalletIcon } from "lucide-react";
-export default async function AppBar() {
-  const user = await auth();
+import { useSession } from "next-auth/react";
+import { useRouter, usePathname } from "next/navigation";
+export default function AppBar() {
+  const user = useSession();
+  const pathname = usePathname();
   return (
     <header className="flex h-16 w-full items-center justify-between bg-background px-4 md:px-6">
       <div className="flex items-center gap-2">
@@ -51,25 +54,27 @@ export default async function AppBar() {
       </nav>
       <div className="flex gap-1">
         <div className="hidden xl:block">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Avatar className="h-10 w-10 bg-[#333]">
-                  <AvatarImage src={user?.user?.image as string} />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <Link href={"/user/profile"}>
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-              </Link>
-              <DropdownMenuItem>Place Holder</DropdownMenuItem>
-              {/* <DropdownMenuItem> */}
-              <LogoutButton />
-              {/* </DropdownMenuItem> */}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {!pathname.includes("profile") && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <Avatar className="h-10 w-10 bg-[#333]">
+                    <AvatarImage src={user.data?.user?.image as string} />
+                    <AvatarFallback>U</AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <Link href={"/user/profile"}>
+                  <DropdownMenuItem>Profile</DropdownMenuItem>
+                </Link>
+                <DropdownMenuItem>Place Holder</DropdownMenuItem>
+                {/* <DropdownMenuItem> */}
+                <LogoutButton />
+                {/* </DropdownMenuItem> */}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
         <Sheet>
           <SheetTrigger asChild>
@@ -86,7 +91,7 @@ export default async function AppBar() {
               <div className="flex flex-col gap-3">
                 <div className="flex gap-2">
                   <Avatar className="h-10 w-10 bg-[#333]">
-                    <AvatarImage src={user?.user?.image as string} />
+                    <AvatarImage src={user?.data?.user?.image as string} />
                     <AvatarFallback>U</AvatarFallback>
                   </Avatar>
                   <LogoutButton />
@@ -152,25 +157,6 @@ function MenuIcon(props: any) {
       <line x1="4" x2="20" y1="12" y2="12" />
       <line x1="4" x2="20" y1="6" y2="6" />
       <line x1="4" x2="20" y1="18" y2="18" />
-    </svg>
-  );
-}
-
-function PowerIcon(props: any) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 2v10" />
-      <path d="M18.4 6.6a9 9 0 1 1-12.77.04" />
     </svg>
   );
 }
