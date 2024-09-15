@@ -215,7 +215,6 @@ export async function UpdateNickName({
       message: "Unauthorized",
     };
   }
-  console.log("updated nicname");
   try {
     await prisma.user.update({
       where: {
