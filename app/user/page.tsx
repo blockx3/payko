@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 function UserPage() {
-  redirect("/user/wallet/send");
+  permanentRedirect("/user/wallet/send");
 }
 
 export default UserPage;

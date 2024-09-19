@@ -8,7 +8,7 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
-   sodipodi:docname="logo.svg"
+   sodipodi:docname="logo-final.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -42,17 +42,11 @@
        id="rect2"
        style="fill:#214478;stroke-width:4.84345;stroke-linecap:round;stroke-linejoin:round"
        d="m 25.800037,160.59404 v 21.15604 H 135.5922 a 14.530354,14.530354 0 0 1 14.53034,14.53035 14.530354,14.530354 0 0 1 -13.56923,14.37806 v 0.24311 a 94.689476,94.689476 0 0 0 -94.655423,94.68759 h 12.239175 9.798529 a 72.651772,72.651772 0 0 1 9.883669,-36.10642 72.651772,72.651772 0 0 1 62.73405,-36.0648 72.651772,72.651772 0 0 1 2.29591,-0.17216 36.325886,36.325886 0 0 0 36.32589,-36.32588 36.325886,36.325886 0 0 0 -36.32589,-36.32589 H 135.5922 56.43203 Z" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:135.817px;font-family:'URW Gothic';-inkscape-font-specification:'URW Gothic Semi-Bold';text-align:center;text-anchor:middle;fill:#214478;stroke-width:4.18038;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
-       x="325.32513"
-       y="314.76248"
-       id="text5"><tspan
-         sodipodi:role="line"
-         id="tspan5"
-         x="325.32513"
-         y="314.76248"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:135.817px;font-family:'URW Gothic';-inkscape-font-specification:'URW Gothic Semi-Bold';stroke-width:4.18038">ayko</tspan></text>
+    <path
+       d="m 245.12524,239.51986 h -16.56967 v 10.05046 c -6.24758,-8.28484 -13.71752,-11.81608 -24.58288,-11.81608 -22.27399,0 -38.30039,16.70549 -38.30039,39.65857 0,22.68144 15.89059,39.11529 37.89294,39.11529 10.59373,0 17.79203,-3.25961 24.99033,-11.54444 v 9.77882 h 16.56967 z m -39.25111,14.80406 c 12.90261,0 22.13817,9.643 22.13817,23.36052 0,5.43268 -2.17307,11.68026 -5.43268,15.48314 -3.66706,4.48196 -9.50719,6.79085 -16.43386,6.79085 -13.17425,0 -22.27398,-8.96392 -22.27398,-22.13817 0,-13.71752 9.09973,-23.49634 22.00235,-23.49634 z m 59.4879,85.56471 h 19.42183 L 328.2453,239.51986 h -20.91582 l -18.06366,48.75831 -16.70549,-48.75831 H 251.91614 L 279.487,307.7 Z m 71.84719,-25.12615 h 18.06366 v -35.1766 l 25.66941,35.1766 h 24.31125 l -31.23791,-38.43621 26.89176,-36.80641 h -21.5949 l -24.03961,35.44824 v -60.57438 h -18.06366 z m 108.78935,-77.00824 c -21.86654,0 -39.79438,17.79203 -39.79438,39.38693 0,21.73072 17.92784,39.38693 39.9302,39.38693 21.86653,0 40.06601,-17.65621 40.06601,-38.84366 0,-22.4098 -17.52039,-39.9302 -40.20183,-39.9302 z m 0.13582,16.56968 c 12.08771,0 21.86653,10.18627 21.86653,22.81725 0,12.63098 -9.77882,22.81726 -21.73072,22.81726 -12.22353,0 -21.86653,-10.18628 -21.86653,-23.08889 0,-12.35935 9.77882,-22.54562 21.73072,-22.54562 z"
+       id="text5"
+       style="font-weight:600;font-size:135.817px;font-family:'URW Gothic';-inkscape-font-specification:'URW Gothic Semi-Bold';text-align:center;text-anchor:middle;fill:#214478;stroke-width:4.18038;stroke-linecap:round;stroke-linejoin:round"
+       aria-label="ayko" />
     <path
        id="rect2-2"
        style="fill:#ffcc00;stroke-width:4.84345;stroke-linecap:round;stroke-linejoin:round"
