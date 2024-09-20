@@ -1,9 +1,9 @@
 import { auth } from "@/auth";
-import { AvatarFallback, AvatarImage, Avatar } from "@radix-ui/react-avatar";
 import WalletActions from "./WalletActions";
 import { UserTotalBalance } from "./UserInfo";
 import { Suspense } from "react";
 import prisma from "@/lib/db";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 async function UserLayout({ children }: { children: React.ReactNode }) {
   const user = await auth();

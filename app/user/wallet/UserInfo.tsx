@@ -78,16 +78,16 @@ async function getAssociateTokenBalance({
   mint: string;
   pubkey: PublicKey;
 }) {
-  if (mint === "NATIVE") {
-    const balance = await conn.getBalance(new PublicKey(pubkey));
-    return balance;
-  }
   try {
+    if (mint === "NATIVE") {
+      const balance = await conn.getBalance(new PublicKey(pubkey));
+      return balance;
+    }
     const ata = await getAssociatedTokenAddress(new PublicKey(mint), pubkey);
     const account = await getAccount(conn, ata);
     return Number(account.amount);
   } catch (error) {
-    // console.log(error);
+    // console.log(error); // only uncomment in development stage
     return 0;
   }
 }
