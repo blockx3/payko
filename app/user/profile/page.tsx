@@ -39,6 +39,11 @@ async function UserProfile() {
           <AddWallet email={dbUser?.email as string} />
         </div>
         <div className="border p-1  min-h-52 rounded-lg flex flex-col gap-2">
+          <div className="flex gap-3 justify-between py-2 px-4 border-b-2">
+            <div className="">Wallet Name</div>
+            <div className="text-gray-600 cursor-pointer px-1 ">Address</div>
+            <div>Action</div>
+          </div>
           <WalletList
             wallet={dbUser?.UserWallet!}
             email={dbUser?.email as string}
