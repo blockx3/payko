@@ -2,9 +2,17 @@
 import {
   ArrowLeftRightIcon,
   CircleUserRoundIcon,
+  CreditCard,
   WalletIcon,
+  Cog,
 } from "lucide-react";
 import Link from "next/link";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion@sidebar";
 
 function SideBar() {
   return (
@@ -35,6 +43,25 @@ function SideBar() {
         <ArrowLeftRightIcon className="group-hover:opacity-100 opacity-50" />
         <span className="flex-1 ms-3 whitespace-nowrap">Transactions</span>
       </Link>
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1">
+          <AccordionTrigger className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group ">
+            <div className="flex">
+              <CreditCard />
+              <span className="ms-3 whitespace-nowrap">Payment</span>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="pl-6 ">
+            <Link
+              href="/user/payment"
+              className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group "
+            >
+              <Cog className="group-hover:opacity-100 opacity-50" />
+              <span className="flex-1 ms-3 whitespace-nowrap">Setup</span>
+            </Link>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 }

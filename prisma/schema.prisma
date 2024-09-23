@@ -30,6 +30,7 @@ model User {
   UserWallet   UserWallet[]
   initalized   Boolean        @default(false)
   transactions transactions[]
+  payment_id   payment_id[]
 }
 
 model Account {
@@ -125,8 +126,6 @@ enum transaction_type {
 
 model transactions {
   id                    String           @id @default(cuid())
-  userId                String
-  user                  User             @relation(fields: [userId], references: [id])
   chain                 Chain
   transection_type      transaction_type
   mint_address          String?
@@ -134,4 +133,53 @@ model transactions {
   to                    String
   amount                Float
   transaction_signature String
+  user                  User             @relation(fields: [userId], references: [id])
+  userId                String
+}
+
+model payment_id {
+  id              String            @id @default(cuid())
+  payment_id      String            @unique
+  active          Boolean           @default(false)
+  createdAt       DateTime          @default(now())
+  user            User              @relation(fields: [userId], references: [id])
+  userId          String
+  payment_details payment_details[]
+}
+
+enum payment_type {
+  ANY
+  NATIVECOIN
+  TOKEN
+}
+
+enum ammount_type {
+  FLEXIBLE
+  FIXED
+}
+
+model payment_details {
+  id                  String             @id @default(cuid())
+  createdAt           DateTime           @default(now())
+  payment_type        payment_type
+  ammount_type        ammount_type
+  ammount             Float?
+  icon                String?
+  title               String?
+  description         String?
+  payment_id_relation payment_id         @relation(fields: [payment_id], references: [payment_id])
+  payment_id          String
+  pay_time_details    pay_time_details[]
+}
+
+model pay_time_details {
+  id                    String          @id @default(cuid())
+  pay_id                String
+  sweep_wallet_key      String
+  createdAt             DateTime        @default(now())
+  timeout_minutes       Int
+  transaction_signature String?
+  success               Boolean         @default(false)
+  payment_detail        payment_details @relation(fields: [payment_detail_id], references: [id])
+  payment_detail_id     String
 }
