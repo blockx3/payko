@@ -20,11 +20,10 @@ async function Main() {
           alt=""
           height={1000} // Arbitrary height
           width={1000} // Arbitrary width
-          layout="responsive"
           className=" xl:w-[800px] object-cover xl:opacity-100 opacity-80 rotate-180 xl:rotate-0"
         />
       </MotionDiv>
-      <div className="h-screen flex flex-col xl:justify-center max-md:pt-28">
+      <div className="h-screen flex flex-col xl:justify-center max-md:pt-10">
         <div className="xl:pl-28 pl-6 xl:space-y-4">
           <div className="xl:text-8xl text-6xl flex gap-2 items-end pt-4">
             <Image
