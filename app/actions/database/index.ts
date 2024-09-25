@@ -20,7 +20,7 @@ const session = await auth();
   }
 
 */
-
+// TODO: add revalidatePath as required
 import nacl from "tweetnacl";
 import { pbkdf2Sync } from "pbkdf2";
 import { $Enums } from "@prisma/client";
@@ -32,7 +32,6 @@ import {
   sendAndConfirmTransaction,
   Keypair,
 } from "@solana/web3.js";
-import bs58 from "bs58";
 import prisma from "@/lib/db";
 import { SecretBoxLength } from "@/lib/constents";
 import { auth } from "@/auth";
@@ -48,6 +47,8 @@ import {
   colors,
   animals,
 } from "unique-names-generator";
+import { v6 } from "uuid";
+import { revalidatePath } from "next/cache";
 
 export async function CreateUserWallet({
   pin,
@@ -59,7 +60,7 @@ export async function CreateUserWallet({
   chain: $Enums.Chain;
 }) {
   const session = await auth();
-  if (!session) {
+  if (!session || session.user?.email != email) {
     return {
       success: false,
       message: "Unauthorized",
@@ -186,6 +187,8 @@ export async function SendCrypto({
           transactionType: $Enums.transaction_type.NATIVECOIN,
           transactionSignature: transection_hash,
         });
+        revalidatePath("/user/transaction");
+        revalidatePath("/user/wallet/send");
         return {
           success: true,
           message: transection_hash,
@@ -209,7 +212,7 @@ export async function UpdateNickName({
   nickname: string;
 }) {
   const session = await auth();
-  if (!session) {
+  if (!session || session.user?.email != email) {
     return {
       success: false,
       message: "Unauthorized",
@@ -224,6 +227,7 @@ export async function UpdateNickName({
         nickname: nickname,
       },
     });
+    revalidatePath("/user/profile");
     return {
       success: true,
       message: "NickName updated",
@@ -249,7 +253,7 @@ export async function AddUserWallet({
   walletname: string;
 }) {
   const session = await auth();
-  if (!session) {
+  if (!session || session.user?.email != email) {
     return {
       success: false,
       message: "Unauthorized",
@@ -295,7 +299,7 @@ export async function AddUserWallet({
         },
       }),
     ]);
-
+    revalidatePath("/user/profile");
     return {
       success: true,
       message: "Wallet created successfully",
@@ -342,6 +346,7 @@ export async function DeleteUserWallet({
         id: walletId,
       },
     });
+    revalidatePath("/user/profile");
     return {
       success: true,
       message: "Wallet deleted",
@@ -351,6 +356,133 @@ export async function DeleteUserWallet({
     return {
       success: false,
       message: "Error deleting wallet",
+    };
+  }
+}
+
+export async function CreatePaymentCategory({
+  email,
+  userId,
+  name,
+}: {
+  email: string;
+  userId: string;
+  name: string;
+}) {
+  const session = await auth();
+  if (!session || session.user?.email != email) {
+    return {
+      success: false,
+      message: "Unauthorized",
+    };
+  }
+  try {
+    await prisma.payment_category.create({
+      data: {
+        name: name,
+        userId: userId,
+        category_id: v6(),
+      },
+    });
+    // revalidatePath("/user/payment/setup");
+    return {
+      success: true,
+      message: "",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Unable to create Category try again !",
+    };
+  }
+}
+
+export async function TogglePaymentCategory({
+  state,
+  email,
+  category_id,
+}: {
+  state: boolean;
+  email: string;
+  category_id: string;
+}) {
+  const session = await auth();
+  if (!session || session.user?.email != email) {
+    return {
+      success: false,
+      message: "Unauthorized",
+    };
+  }
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: email,
+      },
+      include: {
+        payment_category: true,
+      },
+    });
+    if (
+      user?.payment_category.find(
+        (category) => category.category_id == category_id
+      )
+    ) {
+      await prisma.payment_category.update({
+        where: {
+          category_id: category_id,
+        },
+        data: {
+          active: state,
+        },
+      });
+      revalidatePath("/user/payment/setup");
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      return {
+        success: true,
+        message: "Category updated",
+      };
+    }
+    return {
+      success: false,
+      message: "Category not found",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Unable to Toggle , try Again !",
+    };
+  }
+}
+
+export async function DeletePaymentCategory({
+  email,
+  category_id,
+}: {
+  email: string;
+  category_id: string;
+}) {
+  const session = await auth();
+  if (!session || session.user?.email != email) {
+    return {
+      success: false,
+      message: "Unauthorized",
+    };
+  }
+  try {
+    await prisma.payment_category.delete({
+      where: {
+        category_id: category_id,
+      },
+    });
+    revalidatePath("/user/payment/setup");
+    return {
+      success: true,
+      message: "Category deleted",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Unable to delete Category try again !",
     };
   }
 }

@@ -46,7 +46,7 @@ function AddWallet({ email }: { email: string }) {
       walletname: walletname,
     });
     if (res.success) {
-      setError("Wallet Creation Successful: Reload to see");
+      setError("Wallet Creation Successful");
       setLoading(false);
       setPin("");
       setWalletname("");
@@ -85,7 +85,6 @@ function AddWallet({ email }: { email: string }) {
               <InputOTPSlot index={1} />
             </InputOTPGroup>
             <InputOTPSeparator />
-
             <InputOTPGroup>
               <InputOTPSlot index={2} />
               <InputOTPSlot index={3} />
