@@ -25,12 +25,12 @@ model User {
   // Optional for WebAuthn support
   Authenticator Authenticator[]
 
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  UserWallet   UserWallet[]
-  initalized   Boolean        @default(false)
-  transactions transactions[]
-  payment_id   payment_id[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  UserWallet       UserWallet[]
+  initalized       Boolean            @default(false)
+  transactions     transactions[]
+  payment_category payment_category[]
 }
 
 model Account {
@@ -137,9 +137,10 @@ model transactions {
   userId                String
 }
 
-model payment_id {
+model payment_category {
   id              String            @id @default(cuid())
-  payment_id      String            @unique
+  category_id     String            @unique
+  name            String
   active          Boolean           @default(false)
   createdAt       DateTime          @default(now())
   user            User              @relation(fields: [userId], references: [id])
@@ -167,8 +168,8 @@ model payment_details {
   icon                String?
   title               String?
   description         String?
-  payment_id_relation payment_id         @relation(fields: [payment_id], references: [payment_id])
-  payment_id          String
+  payment_id_relation payment_category   @relation(fields: [category_id], references: [category_id])
+  category_id         String
   pay_time_details    pay_time_details[]
 }
 
