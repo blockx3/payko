@@ -18,13 +18,14 @@ async function Main() {
         <Image
           src="https://static.aaraz.me/payko/abstract_obj.png"
           alt=""
-          height={1000} // Arbitrary height
-          width={1000} // Arbitrary width
-          className=" xl:w-[800px] object-cover xl:opacity-100 opacity-80 rotate-180 xl:rotate-0"
+          height={500} // Arbitrary height
+          width={500} // Arbitrary width
+          layout=""
+          className="object-cover opacity-80 rotate-180 xl:w-[40rem] xl:opacity-100 xl:rotate-0 max-md:w-[65vw] max-sm:h-[50vh] max-sm:w-auto"
         />
       </MotionDiv>
       <div className="h-screen flex flex-col xl:justify-center max-md:pt-10">
-        <div className="xl:pl-28 pl-6 xl:space-y-4">
+        <div className="xl:pl-16 pl-6 xl:space-y-4">
           <div className="xl:text-8xl text-6xl flex gap-2 items-end pt-4">
             <Image
               alt="Pay-Ko"
@@ -39,7 +40,7 @@ async function Main() {
             <span className="xl:text-8xl text-sky-500">X</span>
             <div>Payment Gateway</div>
           </div>
-          <div className="xl:text-3xl xl:text-slate-500 text-black/80">
+          <div className="xl:text-2xl xl:text-slate-500 text-black/80">
             Make Payment & get payments without leaving the app
           </div>
           <HomePageActionButtons />
