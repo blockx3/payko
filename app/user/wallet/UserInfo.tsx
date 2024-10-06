@@ -19,7 +19,7 @@ export async function UserTotalBalance({
     },
   });
   const UserPubKey = new PublicKey(
-    UserDB?.UserWallet.filter((d) => d.chain === chain)[0].publicKey as string
+    UserDB?.UserWallet.filter((d) => d.chain === chain)[0]?.publicKey as string
   );
   const Supported_tokens = (await prisma.supportedTokens.findMany()).filter(
     (d) => d.chain === chain
@@ -111,7 +111,7 @@ export async function getUserAvailableTokens({
     },
   });
   const UserPubKey = new PublicKey(
-    UserDB?.UserWallet.filter((d) => d.chain === chain)[0].publicKey as string
+    UserDB?.UserWallet.filter((d) => d.chain === chain)[0]?.publicKey as string
   );
   const Supported_tokens = (await prisma.supportedTokens.findMany()).filter(
     (d) => d.chain === chain

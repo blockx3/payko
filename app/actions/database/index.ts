@@ -486,3 +486,64 @@ export async function DeletePaymentCategory({
     };
   }
 }
+
+export async function CreatePayment({
+  payment_type,
+  amount_type,
+  amount,
+  icon,
+  title,
+  description,
+  category_id,
+  wallet_id,
+  userEmail,
+}: {
+  payment_type: $Enums.payment_type;
+  amount_type: $Enums.amount_type;
+  amount: number;
+  icon: string;
+  title: string;
+  description?: string;
+  category_id: string;
+  wallet_id: string;
+  userEmail: string;
+}) {
+  const session = await auth();
+  if (!session) {
+    return {
+      success: false,
+      message: "Unauthorized",
+    };
+  }
+  try {
+    const res = await prisma.user.findUnique({
+      where: {
+        email: userEmail,
+      },
+    });
+    await prisma.payment_details.create({
+      data: {
+        payment_type: payment_type,
+        amount_type: amount_type,
+        amount: amount,
+        icon: icon,
+        title: title,
+        description: description || "",
+        category_id: category_id,
+        userWalletId: wallet_id,
+        userId: res?.id as string,
+      },
+    });
+    revalidatePath("/user/payment/setup");
+    return {
+      success: true,
+      message: "",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "Failed",
+    };
+  }
+}

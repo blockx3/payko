@@ -14,23 +14,23 @@ datasource db {
 }
 
 model User {
-  id            String          @id @default(cuid())
-  name          String?
-  nickname      String?
-  email         String?         @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id               String             @id @default(cuid())
+  name             String?
+  nickname         String?
+  email            String?            @unique
+  emailVerified    DateTime?
+  image            String?
+  accounts         Account[]
+  sessions         Session[]
   // Optional for WebAuthn support
-  Authenticator Authenticator[]
-
+  Authenticator    Authenticator[]
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   UserWallet       UserWallet[]
   initalized       Boolean            @default(false)
   transactions     transactions[]
   payment_category payment_category[]
+  payment_details  payment_details[]
 }
 
 model Account {
@@ -93,15 +93,16 @@ enum Chain {
 }
 
 model UserWallet {
-  id                   String   @id @default(cuid()) // Wallet ID    
+  id                   String            @id @default(cuid()) // Wallet ID    
   walletname           String?
   userId               String
-  user                 User     @relation(fields: [userId], references: [id])
+  user                 User              @relation(fields: [userId], references: [id])
   chain                Chain
+  payment_details      payment_details[]
   publicKey            String
   privateKey           String
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
   salt_for_pin         String?
   nonce_for_encryption String?
 }
@@ -154,23 +155,27 @@ enum payment_type {
   TOKEN
 }
 
-enum ammount_type {
+enum amount_type {
   FLEXIBLE
   FIXED
 }
 
 model payment_details {
-  id                  String             @id @default(cuid())
-  createdAt           DateTime           @default(now())
-  payment_type        payment_type
-  ammount_type        ammount_type
-  ammount             Float?
-  icon                String?
-  title               String?
-  description         String?
-  payment_id_relation payment_category   @relation(fields: [category_id], references: [category_id])
-  category_id         String
-  pay_time_details    pay_time_details[]
+  id               String             @id @default(cuid())
+  createdAt        DateTime           @default(now())
+  payment_type     payment_type
+  amount_type      amount_type
+  amount           Float?
+  icon             String?
+  title            String?
+  description      String?
+  payment_category payment_category   @relation(fields: [category_id], references: [category_id])
+  category_id      String
+  pay_time_details pay_time_details[]
+  UserWallet       UserWallet         @relation(fields: [userWalletId], references: [id])
+  userWalletId     String
+  User             User               @relation(fields: [userId], references: [id])
+  userId           String
 }
 
 model pay_time_details {
@@ -181,6 +186,7 @@ model pay_time_details {
   timeout_minutes       Int
   transaction_signature String?
   success               Boolean         @default(false)
-  payment_detail        payment_details @relation(fields: [payment_detail_id], references: [id])
+  amount                Float           @default(0)
+  payment_details       payment_details @relation(fields: [payment_detail_id], references: [id])
   payment_detail_id     String
 }
