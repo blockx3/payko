@@ -5,6 +5,7 @@ import {
   CreditCard,
   WalletIcon,
   Cog,
+  PackagePlus,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -53,11 +54,18 @@ function SideBar() {
           </AccordionTrigger>
           <AccordionContent className="pl-6 ">
             <Link
-              href="/user/payment"
+              href="/user/payment/setup"
               className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group "
             >
               <Cog className="group-hover:opacity-100 opacity-50" />
               <span className="flex-1 ms-3 whitespace-nowrap">Setup</span>
+            </Link>
+            <Link
+              href="/user/payment/create"
+              className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group "
+            >
+              <PackagePlus className="group-hover:opacity-100 opacity-50" />
+              <span className="flex-1 ms-3 whitespace-nowrap">Create</span>
             </Link>
           </AccordionContent>
         </AccordionItem>
