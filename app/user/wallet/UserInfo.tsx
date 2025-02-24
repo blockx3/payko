@@ -25,25 +25,10 @@ export async function UserTotalBalance({
     (d) => d.chain === chain
   );
 
-  // Need to update the price fetching logic once we add more tokens
-  const tokenPriceData: {
-    data: {
-      SOL: {
-        price: number;
-        mintSymbol: string;
-      };
-      USDC: {
-        price: number;
-        mintSymbol: string;
-      };
-      USDT: {
-        price: number;
-        mintSymbol: string;
-      };
-    };
-  } = await fetch("https://price.jup.ag/v6/price?ids=SOL,USDC,USDT").then((d) =>
-    d.json()
-  );
+  const QueryURL = Supported_tokens.map((d) => d.token_mint).join(",");
+  const tokenPriceData = await fetch(
+    `https://api.jup.ag/price/v2?ids=${QueryURL}`
+  ).then((d) => d.json());
 
   const total_balance_promisses = Supported_tokens.map(async (token_detail) => {
     let balance = await getAssociateTokenBalance({
@@ -52,11 +37,12 @@ export async function UserTotalBalance({
     });
     balance =
       balance /
-      (token_detail.token_mint === "NATIVE"
+      (token_detail.token_mint === "So11111111111111111111111111111111111111112"
         ? LAMPORTS_PER_SOL
         : 10 ** token_detail.decimal);
     // @ts-ignore
-    const price = balance * tokenPriceData.data[token_detail.symbol]?.price;
+
+    const price = balance * tokenPriceData.data[token_detail.token_mint]?.price;
     return price;
   });
 
@@ -79,7 +65,7 @@ async function getAssociateTokenBalance({
   pubkey: PublicKey;
 }) {
   try {
-    if (mint === "NATIVE") {
+    if (mint === "So11111111111111111111111111111111111111112") {
       const balance = await conn.getBalance(new PublicKey(pubkey));
       return balance;
     }
@@ -123,7 +109,7 @@ export async function getUserAvailableTokens({
     });
     balance =
       balance /
-      (token_detail.token_mint === "NATIVE"
+      (token_detail.token_mint === "So11111111111111111111111111111111111111112"
         ? LAMPORTS_PER_SOL
         : 10 ** token_detail.decimal);
     return {
