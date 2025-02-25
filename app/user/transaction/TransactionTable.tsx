@@ -36,10 +36,10 @@ function TransactionTable({ transactions }: { transactions: transactions[] }) {
                   tx.transection_type === $Enums.transaction_type.NATIVECOIN
                     ? "NATIVE"
                     : tx.transection_type === $Enums.transaction_type.NFT
-                    ? "NFT"
-                    : tx.transection_type === $Enums.transaction_type.TOKEN
-                    ? "TOKEN"
-                    : "default"
+                      ? "NFT"
+                      : tx.transection_type === $Enums.transaction_type.TOKEN
+                        ? "TOKEN"
+                        : "default"
                 }`}
               >
                 {tx.transection_type}

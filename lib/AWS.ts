@@ -13,7 +13,7 @@ export async function Deletes3image({ key }: { key: string }) {
       new DeleteObjectCommand({
         Bucket: "aaraz-main",
         Key: key,
-      })
+      }),
     );
   } catch (error) {
     console.log(error);

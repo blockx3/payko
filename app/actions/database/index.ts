@@ -20,7 +20,7 @@ const session = await auth();
   }
 
 */
-// TODO: add revalidatePath as required
+// TODO: add revalidatePath for cache invalidation as required
 import nacl from "tweetnacl";
 import { pbkdf2Sync } from "pbkdf2";
 import { $Enums } from "@prisma/client";
@@ -94,7 +94,7 @@ export async function CreateUserWallet({
     const encryptedPrivateKey = nacl.secretbox(
       Buffer.from(messageUint8),
       nonce,
-      key
+      key,
     );
     await prisma.$transaction([
       prisma.userWallet.create({
@@ -276,7 +276,7 @@ export async function AddUserWallet({
     const encryptedPrivateKey = nacl.secretbox(
       Buffer.from(messageUint8),
       nonce,
-      key
+      key,
     );
     await prisma.$transaction([
       prisma.userWallet.create({
@@ -424,7 +424,7 @@ export async function TogglePaymentCategory({
     });
     if (
       user?.payment_category.find(
-        (category) => category.category_id == category_id
+        (category) => category.category_id == category_id,
       )
     ) {
       await prisma.payment_category.update({

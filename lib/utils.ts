@@ -30,7 +30,7 @@ export async function getUserWalletKeypair({
   });
 
   const walletAsPerChain = user?.UserWallet.filter(
-    (wallet) => wallet.chain === chain
+    (wallet) => wallet.chain === chain,
   )[0];
   const secretKey = walletAsPerChain?.privateKey
     .split(",")
@@ -42,13 +42,13 @@ export async function getUserWalletKeypair({
   const getSalt = Buffer.from(
     walletAsPerChain?.salt_for_pin
       ?.split(",")
-      .map((num) => parseInt(num)) as number[]
+      .map((num) => parseInt(num)) as number[],
   );
   const key = pbkdf2Sync(pin, getSalt, 100000, SecretBoxLength.Key, "sha512");
   const decryptedPrivateKey = nacl.secretbox.open(
     Uint8Array.from(secretKey),
     Uint8Array.from(nonce),
-    key
+    key,
   );
   if (!decryptedPrivateKey) {
     return null;

@@ -8,10 +8,10 @@ async function WelcomeInit() {
   const session = await auth();
   if (!session) {
     const callbackUrl = encodeURIComponent(
-      `${process.env.NEXTAUTH_URL}/user/wallet/send`
+      `${process.env.NEXTAUTH_URL}/user/wallet/send`,
     );
     redirect(
-      `${process.env.NEXTAUTH_URL}/api/auth/signin?callbackUrl=${callbackUrl}`
+      `${process.env.NEXTAUTH_URL}/api/auth/signin?callbackUrl=${callbackUrl}`,
     );
   }
   const userDB = await prisma.user.findUnique({
@@ -25,10 +25,10 @@ async function WelcomeInit() {
 
   if (!userDB) {
     const callbackUrl = encodeURIComponent(
-      `${process.env.NEXTAUTH_URL}/user/wallet/send`
+      `${process.env.NEXTAUTH_URL}/user/wallet/send`,
     );
     redirect(
-      `${process.env.NEXTAUTH_URL}/api/auth/signin?callbackUrl=${callbackUrl}`
+      `${process.env.NEXTAUTH_URL}/api/auth/signin?callbackUrl=${callbackUrl}`,
     );
   }
 

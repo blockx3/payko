@@ -19,15 +19,16 @@ export async function UserTotalBalance({
     },
   });
   const UserPubKey = new PublicKey(
-    UserDB?.UserWallet.filter((d) => d.chain === chain)[0]?.publicKey as string
+    UserDB?.UserWallet.filter((d) => d.chain === chain)[0]?.publicKey as string,
   );
   const Supported_tokens = (await prisma.supportedTokens.findMany()).filter(
-    (d) => d.chain === chain
+    (d) => d.chain === chain,
   );
 
   const QueryURL = Supported_tokens.map((d) => d.token_mint).join(",");
   const tokenPriceData = await fetch(
-    `https://api.jup.ag/price/v2?ids=${QueryURL}`
+    `https://api.jup.ag/price/v2?ids=${QueryURL}`,
+    { cache: "no-store" },
   ).then((d) => d.json());
 
   const total_balance_promisses = Supported_tokens.map(async (token_detail) => {
@@ -48,7 +49,7 @@ export async function UserTotalBalance({
 
   const total_balance = (await Promise.all(total_balance_promisses)).reduce(
     (a, b) => a + b,
-    0
+    0,
   );
   return (
     <div className="xl:text-4xl text-2xl">
@@ -97,10 +98,10 @@ export async function getUserAvailableTokens({
     },
   });
   const UserPubKey = new PublicKey(
-    UserDB?.UserWallet.filter((d) => d.chain === chain)[0]?.publicKey as string
+    UserDB?.UserWallet.filter((d) => d.chain === chain)[0]?.publicKey as string,
   );
   const Supported_tokens = (await prisma.supportedTokens.findMany()).filter(
-    (d) => d.chain === chain
+    (d) => d.chain === chain,
   );
   const AvailableTokenDetails = Supported_tokens.map(async (token_detail) => {
     let balance = await getAssociateTokenBalance({

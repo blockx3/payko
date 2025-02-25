@@ -9,7 +9,7 @@ async function main() {
         name: "SOL",
         symbol: "SOL",
         decimal: 0,
-        token_mint: "NATIVE",
+        token_mint: "So11111111111111111111111111111111111111112",
         imageUrl: "https://cryptologos.cc/logos/solana-sol-logo.svg?v=033",
       },
       {

@@ -63,7 +63,7 @@ export function PaymentCreateForm({
   });
   const [file, setFile] = useState<File | null>(null);
   const [iconUrl, setIconUrl] = useState(
-    "https://static.aaraz.me/payko/money.png"
+    "https://static.aaraz.me/payko/money.png",
   );
   const onSubmit: SubmitHandler<Inputs> = async (InputFormData) => {
     let PaymentIconUrl = iconUrl;
@@ -79,7 +79,7 @@ export function PaymentCreateForm({
       Object.entries(fields as Record<string, string>).forEach(
         ([key, value]) => {
           formData.append(key, value);
-        }
+        },
       );
       formData.append("file", file as File);
       const response = await fetch(url as string, {

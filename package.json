@@ -6,12 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "docker-dev": "bash ./meta/dev.docker dev",
     "docker-clean": "bash ./meta/dev.docker clean",
     "docker-psql": "bash ./meta/dev.docker psql",
     "docker-shell": "bash ./meta/dev.docker shell",
-    "docker-migrate": "bash ./meta/dev.docker migrate"
+    "docker-migrate": "bash ./meta/dev.docker migrate",
+    "format": "prettier . --write",
+    "lint": "eslint . --ext .ts,.tsx",
+    "prepare": "husky"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.2",
@@ -59,13 +61,19 @@
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed/seed.ts"
   },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.7",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
     "postcss": "^8",
+    "prettier": "3.5.2",
     "prisma": "^5.19.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
