@@ -12,6 +12,7 @@
     "docker-shell": "bash ./meta/dev.docker shell",
     "docker-migrate": "bash ./meta/dev.docker migrate",
     "format": "prettier . --write",
+    "format:check": "prettier . --check",
     "lint": "eslint . --ext .ts,.tsx",
     "prepare": "husky"
   },
