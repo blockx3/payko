@@ -37,6 +37,8 @@ const Payment_details_Schema = z.object({
   description: z.string().optional(),
   payment_category: z.string({ message: "Payment Category Required" }),
   wallet: z.string({ message: "Wallet is required" }),
+  redirectUrl: z.string(),
+  webhookUrl: z.string(),
 });
 
 type Inputs = z.infer<typeof Payment_details_Schema>;
@@ -109,6 +111,8 @@ export function PaymentCreateForm({
       category_id: InputFormData.payment_category,
       icon: PaymentIconUrl,
       wallet_id: InputFormData.wallet,
+      webhookUrl: InputFormData.webhookUrl,
+      redirectUrl: InputFormData.redirectUrl,
       userEmail: session.data?.user?.email as string,
     });
     if (res.success) {
@@ -325,6 +329,28 @@ export function PaymentCreateForm({
                 </SelectContent>
               </Select>
             )}
+
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="webhookUrl">
+            Webhook URL
+
+          </Label>
+          <Input
+            {...register("webhookUrl")}
+            placeholder="Webhook URL"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="redirectUrl">
+            redirect ur URL
+
+          </Label>
+          <Input
+            {...register("redirectUrl")}
+            id="redirectUrl"
+            placeholder="redirect URL"
           />
         </div>
         <Button type="submit" disabled={isSubmitting}>

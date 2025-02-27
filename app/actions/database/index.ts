@@ -497,6 +497,8 @@ export async function CreatePayment({
   category_id,
   wallet_id,
   userEmail,
+  redirectUrl,
+  webhookUrl
 }: {
   payment_type: $Enums.payment_type;
   amount_type: $Enums.amount_type;
@@ -507,6 +509,9 @@ export async function CreatePayment({
   category_id: string;
   wallet_id: string;
   userEmail: string;
+  redirectUrl: string;
+  webhookUrl: string
+
 }) {
   const session = await auth();
   if (!session) {
@@ -532,6 +537,8 @@ export async function CreatePayment({
         category_id: category_id,
         userWalletId: wallet_id,
         userId: res?.id as string,
+        redirectUrl: redirectUrl,
+        webhookUrl: webhookUrl
       },
     });
     revalidatePath("/user/payment/setup");
