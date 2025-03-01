@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import prisma from "@/lib/db";
 import TransactionTable from "./TransactionTable";
 import { Bounce, ToastContainer } from "react-toastify";

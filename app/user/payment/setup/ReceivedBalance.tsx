@@ -11,7 +11,7 @@ async function ReceivedBalance({
 }: {
   payment_detail_id: string;
 }) {
-  const user = await prisma.pay_time_details.findMany({
+  const user = await prisma.payments.findMany({
     where: {
       id: payment_detail_id,
     },
