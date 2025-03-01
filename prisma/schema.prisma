@@ -105,7 +105,7 @@ enum Chain {
 model UserWallet {
   id                   String            @id @default(cuid()) // Wallet ID    
   walletname           String?
-  userId               String
+  userId               String            @unique
   user                 User              @relation(fields: [userId], references: [id])
   chain                Chain
   payment_details      payment_details[]
@@ -145,7 +145,7 @@ model transactions {
   amount                Float
   transaction_signature String
   user                  User             @relation(fields: [userId], references: [id])
-  userId                String
+  userId                String           @unique
 }
 
 model payment_category {
@@ -154,7 +154,7 @@ model payment_category {
   name            String
   active          Boolean           @default(false)
   user            User              @relation(fields: [userId], references: [id])
-  userId          String
+  userId          String            @unique
   payment_details payment_details[]
   createdAt       DateTime          @default(now())
 }
@@ -186,7 +186,7 @@ model payment_details {
   UserWallet       UserWallet       @relation(fields: [userWalletId], references: [id])
   userWalletId     String
   User             User             @relation(fields: [userId], references: [id])
-  userId           String
+  userId           String           @unique
   createdAt        DateTime         @default(now())
 }
 

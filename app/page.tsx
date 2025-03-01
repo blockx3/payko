@@ -55,9 +55,7 @@ async function Main() {
             speed={0.5}
           />
         </div>
-        <div>
-        
-        </div>
+        <div></div>
       </div>
     </div>
   );

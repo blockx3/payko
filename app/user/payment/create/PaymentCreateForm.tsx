@@ -329,24 +329,14 @@ export function PaymentCreateForm({
                 </SelectContent>
               </Select>
             )}
-
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="webhookUrl">
-            Webhook URL
-
-          </Label>
-          <Input
-            {...register("webhookUrl")}
-            placeholder="Webhook URL"
-          />
+          <Label htmlFor="webhookUrl">Webhook URL</Label>
+          <Input {...register("webhookUrl")} placeholder="Webhook URL" />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="redirectUrl">
-            redirect ur URL
-
-          </Label>
+          <Label htmlFor="redirectUrl">redirect ur URL</Label>
           <Input
             {...register("redirectUrl")}
             id="redirectUrl"
