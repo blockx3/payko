@@ -3,6 +3,7 @@ RUN --mount=type=cache,target=~/.npm npm install pnpm -g
 COPY . /app
 WORKDIR /app
 RUN --mount=type=cache,target=node_modules --mount=type=cache,target=.next/cache pnpm install --frozen-lockfile
+RUN --mount=type=cache,target=node_modules --mount=type=cache,target=.next/cache pnpx prisma generate
 RUN --mount=type=cache,target=node_modules --mount=type=cache,target=.next/cache pnpm build
 
 FROM node:lts-iron AS run_stage
