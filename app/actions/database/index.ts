@@ -454,6 +454,64 @@ export async function TogglePaymentCategory({
   }
 }
 
+export async function TogglePaymentLink({
+  state,
+  email,
+  payment_detail_id,
+}: {
+  state: boolean;
+  email: string;
+  payment_detail_id: string;
+}) {
+  const session = await auth();
+  if (!session || session.user?.email != email) {
+    return {
+      success: false,
+      message: "Unauthorized",
+    };
+  }
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: email,
+      },
+      include: {
+        payment_details: true,
+      },
+    });
+    if (
+      user?.payment_details.find(
+        (payment_detail) => payment_detail.id == payment_detail_id,
+      )
+    ) {
+      await prisma.payment_details.update({
+        where: {
+          id: payment_detail_id,
+        },
+        data: {
+          active: state,
+        },
+      });
+      revalidatePath("/user/payment/setup");
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      return {
+        success: true,
+        message: "Payment Detail updated",
+      };
+    }
+    return {
+      success: false,
+      message: "Payment Detail not found",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "Unable to Toggle , try Again !",
+    };
+  }
+}
+
 export async function DeletePaymentCategory({
   email,
   category_id,
@@ -472,6 +530,38 @@ export async function DeletePaymentCategory({
     await prisma.payment_category.delete({
       where: {
         category_id: category_id,
+      },
+    });
+    revalidatePath("/user/payment/setup");
+    return {
+      success: true,
+      message: "Category deleted",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Unable to delete Category try again !",
+    };
+  }
+}
+export async function DeletePaymentDetail({
+  email,
+  PaymentDetailId,
+}: {
+  email: string;
+  PaymentDetailId: string;
+}) {
+  const session = await auth();
+  if (!session || session.user?.email != email) {
+    return {
+      success: false,
+      message: "Unauthorized",
+    };
+  }
+  try {
+    await prisma.payment_details.delete({
+      where: {
+        id: PaymentDetailId,
       },
     });
     revalidatePath("/user/payment/setup");

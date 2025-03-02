@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import {
   Tooltip,
   TooltipContent,
@@ -11,12 +12,12 @@ async function ReceivedBalance({
 }: {
   payment_detail_id: string;
 }) {
-  const user = await prisma.received_payments.findMany({
+  const data = await prisma.received_payments.findMany({
     where: {
-      id: payment_detail_id,
+      payment_detail_id: payment_detail_id,
     },
   });
-  const received = user.reduce((acc, item) => {
+  const received = data.reduce((acc, item) => {
     return acc + item.amount;
   }, 0);
   return (

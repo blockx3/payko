@@ -13,26 +13,29 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { DeletePaymentCategory } from "@/app/actions/database";
+import {
+  DeletePaymentCategory,
+  DeletePaymentDetail,
+} from "@/app/actions/database";
 
-function DeletePaymentCategoryBtn({
+function DeletePaymentDetailsBtn({
   email,
-  category_id,
+  PaymentDetailId,
 }: {
   email: string;
-  category_id: string;
+  PaymentDetailId: string;
 }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [error, setError] = useState("");
   async function handleDelete() {
     setLoading(true);
-    const res = await DeletePaymentCategory({
+    const res = await DeletePaymentDetail({
       email: email,
-      category_id: category_id,
+      PaymentDetailId: PaymentDetailId,
     });
     if (res.success) {
-      setError("Catagory Deleted Successfully");
+      setError("Payment Link Deleted Successfully");
       setLoading(false);
       router.refresh();
       return;
@@ -54,7 +57,7 @@ function DeletePaymentCategoryBtn({
             </AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete your
-              Payment Category.
+              Payment Link.
             </AlertDialogDescription>
           </AlertDialogHeader>
           {error && <div className="text-sm text-wrap">{error}</div>}
@@ -81,4 +84,4 @@ function DeletePaymentCategoryBtn({
   );
 }
 
-export default DeletePaymentCategoryBtn;
+export default DeletePaymentDetailsBtn;

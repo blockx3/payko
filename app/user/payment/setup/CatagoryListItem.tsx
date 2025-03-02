@@ -64,21 +64,39 @@ function CatagoriesList({
         {loading ? (
           <Loader2 className="animate-spin" />
         ) : (
-          <Switch
-            checked={active}
-            onCheckedChange={async (e) => {
-              setLoading(true);
-              const res = await TogglePaymentCategory({
-                state: e,
-                email: email,
-                category_id: category_id,
-              });
-              if (!res.success) {
-                alert(res.message);
-                return;
-              }
-              if (e) {
-                toast.success(`${e ? "Toggled active" : "Toggled disabled"}`, {
+          <>
+            <Switch
+              checked={active}
+              onCheckedChange={async (e) => {
+                setLoading(true);
+                const res = await TogglePaymentCategory({
+                  state: e,
+                  email: email,
+                  category_id: category_id,
+                });
+                if (!res.success) {
+                  alert(res.message);
+                  return;
+                }
+                if (e) {
+                  toast.success(
+                    `${e ? "Toggled active" : "Toggled disabled"}`,
+                    {
+                      position: "bottom-right",
+                      autoClose: 1000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                      transition: Bounce,
+                    },
+                  );
+                  setLoading(false);
+                  return;
+                }
+                toast.warn(`${e ? "Toggled active" : "Toggled disabled"}`, {
                   position: "bottom-right",
                   autoClose: 1000,
                   hideProgressBar: false,
@@ -90,22 +108,9 @@ function CatagoriesList({
                   transition: Bounce,
                 });
                 setLoading(false);
-                return;
-              }
-              toast.warn(`${e ? "Toggled active" : "Toggled disabled"}`, {
-                position: "bottom-right",
-                autoClose: 1000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-              });
-              setLoading(false);
-            }}
-          />
+              }}
+            />
+          </>
         )}
       </div>
     </div>

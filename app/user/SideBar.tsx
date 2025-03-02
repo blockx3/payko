@@ -58,7 +58,7 @@ function SideBar() {
               className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group "
             >
               <Cog className="group-hover:opacity-100 opacity-50" />
-              <span className="flex-1 ms-3 whitespace-nowrap">Setup</span>
+              <span className="flex-1 ms-3 whitespace-nowrap">List</span>
             </Link>
             <Link
               href="/user/payment/create"

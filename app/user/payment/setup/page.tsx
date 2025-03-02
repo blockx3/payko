@@ -89,6 +89,8 @@ async function UserPayment() {
                     payment.UserWallet.walletname as string,
                     payment.payment_type,
                   ]}
+                  active={payment.active}
+                  payment_detail_id={payment.id}
                 >
                   <Suspense fallback={<div>Loading...</div>}>
                     <ReceivedBalance payment_detail_id={payment.id} />
