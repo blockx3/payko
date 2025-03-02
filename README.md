@@ -24,4 +24,7 @@ You can create payment categories to organize your payment links. You can create
 
 You can create multiple wallets to receive payments. You can create wallet for each of your business or for each of your customer. You can create wallet for each of your product or service. ![Screenshot_20250302_102308](https://github.com/user-attachments/assets/7dbc7089-ef48-4373-8785-9b2d4d997403)
 
+5. __Slim and clean payment page__
+
+   ![Screenshot_20250302_102036](https://github.com/user-attachments/assets/dd7a0cd1-9bab-4be8-90b8-3c5b95bf4ea5)
 
