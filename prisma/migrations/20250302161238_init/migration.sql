@@ -5,7 +5,7 @@ CREATE TYPE "Chain" AS ENUM ('SOLANA');
 CREATE TYPE "transaction_type" AS ENUM ('NATIVECOIN');
 
 -- CreateEnum
-CREATE TYPE "payment_type" AS ENUM ('ANY', 'NATIVECOIN', 'TOKEN');
+CREATE TYPE "payment_type" AS ENUM ('NATIVECOIN');
 
 -- CreateEnum
 CREATE TYPE "amount_type" AS ENUM ('FLEXIBLE', 'FIXED');
@@ -145,6 +145,7 @@ CREATE TABLE "payment_details" (
     "description" TEXT,
     "redirectUrl" TEXT,
     "webhookUrl" TEXT,
+    "active" BOOLEAN NOT NULL DEFAULT false,
     "category_id" TEXT NOT NULL,
     "userWalletId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
