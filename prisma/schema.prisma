@@ -106,7 +106,7 @@ model UserWallet {
   id                   String            @id @default(cuid()) // Wallet ID    
   walletname           String?
   userId               String
-  user                 User              @relation(fields: [userId], references: [id])
+  user                 User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   chain                Chain
   payment_details      payment_details[]
   publicKey            String
@@ -142,7 +142,7 @@ model transactions {
   to                    String
   amount                Float
   transaction_signature String
-  user                  User             @relation(fields: [userId], references: [id])
+  user                  User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId                String
 }
 
@@ -151,7 +151,7 @@ model payment_category {
   category_id     String            @unique
   name            String
   active          Boolean           @default(false)
-  user            User              @relation(fields: [userId], references: [id])
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId          String
   payment_details payment_details[]
   createdAt       DateTime          @default(now())
@@ -183,7 +183,7 @@ model payment_details {
   payments         received_payments[]
   UserWallet       UserWallet          @relation(fields: [userWalletId], references: [id])
   userWalletId     String
-  User             User                @relation(fields: [userId], references: [id])
+  User             User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId           String
   createdAt        DateTime            @default(now())
 }
@@ -198,7 +198,7 @@ model received_payments {
   from                  String
   to                    String
   amount                Float
-  payment_details       payment_details @relation(fields: [payment_detail_id], references: [id])
+  payment_details       payment_details @relation(fields: [payment_detail_id], references: [id], onDelete: Cascade)
   payment_detail_id     String
   createdAt             DateTime        @default(now())
 }

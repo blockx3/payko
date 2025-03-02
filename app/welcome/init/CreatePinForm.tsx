@@ -27,8 +27,6 @@ function CreatePinForm() {
       chain: "SOLANA",
       email: session.data?.user?.email as string,
     });
-    alert(res.message);
-    setLoading(false);
     router.push("/user/wallet/send");
   }
 
