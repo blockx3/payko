@@ -35,11 +35,7 @@ function TransactionTable({ transactions }: { transactions: transactions[] }) {
                 variant={`${
                   tx.transection_type === $Enums.transaction_type.NATIVECOIN
                     ? "NATIVE"
-                    : tx.transection_type === $Enums.transaction_type.NFT
-                      ? "NFT"
-                      : tx.transection_type === $Enums.transaction_type.TOKEN
-                        ? "TOKEN"
-                        : "default"
+                    : "default"
                 }`}
               >
                 {tx.transection_type}
