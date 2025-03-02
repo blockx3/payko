@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-available_commands='available_commands: dev, clean, psql, migrate, shell'
+available_commands='available_commands: dev, clean, psql, migrate, shell, build'
 
 if [[ -z "$1" ]]; then
   echo $available_commands
@@ -37,6 +37,8 @@ elif [ "$1" == "migrate" ]; then
   fi
 
   docker-compose -f $project/meta/docker/dev.compose.yml exec -it web bash -c "pnpm dlx prisma migrate dev "$name
+elif [ "$1" == "build" ]; then
+  docker-compose -f $project/meta/docker/prod.compose.yml build
 else
   echo
   echo unknown command
