@@ -1,5 +1,7 @@
 "use server";
 
+import { auth } from "@/auth";
+import prisma from "@/lib/db";
 import { clusterApiUrl, Connection, Transaction } from "@solana/web3.js";
 
 /*
@@ -33,15 +35,40 @@ export async function SendSignedTransactionToBlockchain({
   message: string;
   data: any;
 }> {
-  const transaction = Transaction.from(
-    Buffer.from(signedTransactionBase64, "base64"),
-  );
-  const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
-  // const sign = await sendAndConfirmTransaction(connection, transaction, []);
-  const sign = await connection.sendRawTransaction(transaction.serialize());
-  return {
-    success: true,
-    message: "success",
-    data: sign,
-  };
+  try {
+    const session = await auth();
+    const transaction = Transaction.from(
+      Buffer.from(signedTransactionBase64, "base64"),
+    );
+    const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+    // const sign = await sendAndConfirmTransaction(connection, transaction, []);
+    const sign = await connection.sendRawTransaction(transaction.serialize());
+    await prisma.transactions.create({
+      data: {
+        user: {
+          connect: {
+            email: session?.user?.email as string,
+          },
+        },
+        amount: 0,
+        transection_type: "NATIVECOIN",
+        transaction_signature: sign,
+        to: "sdsdsd",
+        from: "sdsds",
+        chain: "SOLANA",
+      },
+    });
+    return {
+      success: true,
+      message: "success",
+      data: sign,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "failed",
+      data: "",
+    };
+  }
 }

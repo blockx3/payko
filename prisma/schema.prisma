@@ -158,9 +158,9 @@ model payment_category {
 }
 
 enum payment_type {
-  ANY
+  // ANY
   NATIVECOIN
-  TOKEN
+  // TOKEN
 }
 
 enum amount_type {

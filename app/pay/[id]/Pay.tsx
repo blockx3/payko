@@ -2,8 +2,17 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { $Enums } from "@prisma/client";
+import WalletButton from "@/components/WalletConnectButton";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import {
+  SystemProgram,
+  Transaction,
+  PublicKey,
+  LAMPORTS_PER_SOL,
+} from "@solana/web3.js";
+import { SendSignedTransactionToBlockchain } from "@/app/actions/web3";
+import { useRouter } from "next/navigation";
 
 export interface IPaymentDetails {
   id: string;
@@ -13,8 +22,8 @@ export interface IPaymentDetails {
   icon: string | null;
   title: string;
   description: string | null;
-  redirectUrl: string;
-  webhookUrl: string;
+  redirectUrl: string | null;
+  webhookUrl: string | null;
 }
 
 type Token = {
@@ -28,11 +37,15 @@ type Token = {
 export default function PaymentPage({
   paymentDetails,
   supportedTokens,
+  MerchantWallet,
 }: {
   paymentDetails: IPaymentDetails;
   supportedTokens: Token[];
+  MerchantWallet: string;
 }) {
   const router = useRouter();
+  const { connection } = useConnection();
+  const { signTransaction, publicKey, connected } = useWallet();
   const [selectedToken, setSelectedToken] = useState<Token | null>(null);
   const [amount, setAmount] = useState<string>(
     paymentDetails.amount?.toString() || "",
@@ -67,15 +80,30 @@ export default function PaymentPage({
     }
 
     setIsLoading(true);
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      router.push(paymentDetails.redirectUrl || "/payment/success");
-    } catch (error) {
-      console.error("Payment failed:", error);
-      alert("Payment failed. Please try again.");
-    } finally {
-      setIsLoading(false);
+    if (!signTransaction || !publicKey) {
+      return;
     }
+    const transaction = new Transaction().add(
+      SystemProgram.transfer({
+        fromPubkey: publicKey as PublicKey,
+        toPubkey: new PublicKey(MerchantWallet),
+        lamports: Number(amount) * LAMPORTS_PER_SOL, // Convert SOL to lamports
+      }),
+    );
+    const { blockhash } = await connection.getLatestBlockhash();
+    transaction.recentBlockhash = blockhash;
+    transaction.feePayer = publicKey;
+    const signedTransaction = await signTransaction(transaction);
+    console.log(signedTransaction.serialize().toString("base64"));
+    const res = await SendSignedTransactionToBlockchain({
+      signedTransactionBase64: signedTransaction.serialize().toString("base64"),
+    });
+    if (res.success) {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      alert("Payment successful!");
+      router.push(`https://solscan.io/tx/${res.data}?cluster=devnet`);
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -162,40 +190,43 @@ export default function PaymentPage({
             )}
           </div>
 
-          {/* Pay Button */}
-          <button
-            onClick={handlePayment}
-            disabled={isLoading}
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-4 px-6 rounded-lg transition duration-300 ease-in-out flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            {isLoading ? (
-              <>
-                <svg
-                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-                Processing Payment...
-              </>
-            ) : (
-              `Pay ${amount ? `${amount} ${selectedToken?.symbol || ""}` : "Now"}`
-            )}
-          </button>
+          {connected ? (
+            <button
+              onClick={handlePayment}
+              disabled={isLoading}
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-4 px-6 rounded-lg transition duration-300 ease-in-out flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              {isLoading ? (
+                <>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Processing Payment...
+                </>
+              ) : (
+                `Pay ${amount ? `${amount} ${selectedToken?.symbol || ""}` : "Now"}`
+              )}
+            </button>
+          ) : (
+            <WalletButton />
+          )}
         </div>
       </div>
       {selectedToken && (

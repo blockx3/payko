@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { Bounce, toast } from "react-toastify";
 import DeletePaymentDetailsBtn from "./DeletePaymentDetails";
+import CopyBtn from "@/components/CopyBtn";
 
 function PaymentDetailList({
   data,
@@ -98,6 +99,7 @@ function PaymentDetailList({
             />
           </>
         )}
+        <CopyBtn text={`/pay/${payment_detail_id}`} />
       </div>
     </div>
   );

@@ -21,33 +21,35 @@ export default async function Page({
     },
   });
 
-  console.log("supportedTokens", supportedTokens);
   const paymentDetails = await prisma.payment_details.findUnique({
     where: {
       id: params.id,
     },
-    select: {
-      id: true,
-      payment_type: true,
-      amount_type: true,
-      amount: true,
-      icon: true,
-      title: true,
-      description: true,
-      redirectUrl: true,
-      webhookUrl: true,
+    include: {
+      UserWallet: true,
     },
   });
-  console.log("paymentDetails", paymentDetails);
 
   if (!paymentDetails) return <>Payment doesnot exist</>;
+  const paymentDetail = {
+    id: paymentDetails.id,
+    payment_type: paymentDetails.payment_type,
+    amount_type: paymentDetails.amount_type,
+    amount: paymentDetails.amount,
+    icon: paymentDetails.icon,
+    title: paymentDetails.title,
+    description: paymentDetails.description,
+    redirectUrl: paymentDetails.redirectUrl,
+    webhookUrl: paymentDetails.webhookUrl,
+  };
 
   return (
     <div>
       <div className="flex flex-col items-center justify-center h-screen">
         <Pay
-          paymentDetails={paymentDetails}
+          paymentDetails={paymentDetail}
           supportedTokens={supportedTokens}
+          MerchantWallet={paymentDetails.UserWallet.publicKey}
         />
       </div>
     </div>

@@ -1,9 +1,14 @@
+"use client";
 import Aurora from "@/components/Aurora";
 import HomePageActionButtons from "@/components/HomePageButtons";
 import { MotionDiv } from "@/lib/UseClientUIs";
 import Image from "next/image";
+import { useEffect } from "react";
 
-async function Main() {
+function Main() {
+  useEffect(() => {
+    alert("App Is running on Solana DevNet");
+  }, []);
   return (
     <div>
       <MotionDiv
