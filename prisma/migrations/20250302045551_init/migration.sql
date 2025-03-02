@@ -143,8 +143,8 @@ CREATE TABLE "payment_details" (
     "icon" TEXT,
     "title" TEXT NOT NULL,
     "description" TEXT,
-    "redirectUrl" TEXT NOT NULL,
-    "webhookUrl" TEXT NOT NULL,
+    "redirectUrl" TEXT,
+    "webhookUrl" TEXT,
     "category_id" TEXT NOT NULL,
     "userWalletId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
@@ -192,13 +192,13 @@ ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Authenticator" ADD CONSTRAINT "Authenticator_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UserWallet" ADD CONSTRAINT "UserWallet_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "UserWallet" ADD CONSTRAINT "UserWallet_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "transactions" ADD CONSTRAINT "transactions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "transactions" ADD CONSTRAINT "transactions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "payment_category" ADD CONSTRAINT "payment_category_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "payment_category" ADD CONSTRAINT "payment_category_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "payment_details" ADD CONSTRAINT "payment_details_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "payment_category"("category_id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -207,7 +207,7 @@ ALTER TABLE "payment_details" ADD CONSTRAINT "payment_details_category_id_fkey" 
 ALTER TABLE "payment_details" ADD CONSTRAINT "payment_details_userWalletId_fkey" FOREIGN KEY ("userWalletId") REFERENCES "UserWallet"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "payment_details" ADD CONSTRAINT "payment_details_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "payment_details" ADD CONSTRAINT "payment_details_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "received_payments" ADD CONSTRAINT "received_payments_payment_detail_id_fkey" FOREIGN KEY ("payment_detail_id") REFERENCES "payment_details"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "received_payments" ADD CONSTRAINT "received_payments_payment_detail_id_fkey" FOREIGN KEY ("payment_detail_id") REFERENCES "payment_details"("id") ON DELETE CASCADE ON UPDATE CASCADE;

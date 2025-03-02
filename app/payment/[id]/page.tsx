@@ -45,15 +45,10 @@ export default async function Page({
   return (
     <div>
       <div className="flex flex-col items-center justify-center h-screen">
-        {paymentDetails && supportedTokens ? (
-          // @ts-ignore
-          <Pay
-            paymentDetails={paymentDetails}
-            supportedTokens={supportedTokens}
-          />
-        ) : (
-          <div>Loading...</div>
-        )}
+        <Pay
+          paymentDetails={paymentDetails}
+          supportedTokens={supportedTokens}
+        />
       </div>
     </div>
   );

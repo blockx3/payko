@@ -176,8 +176,8 @@ model payment_details {
   icon             String?
   title            String
   description      String?
-  redirectUrl      String
-  webhookUrl       String
+  redirectUrl      String?
+  webhookUrl       String?
   payment_category payment_category    @relation(fields: [category_id], references: [category_id])
   category_id      String
   payments         received_payments[]

@@ -79,7 +79,7 @@ export default function PaymentPage({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen  flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-2xl">
         {/* Payment Image */}
         <div className="w-full h-56 relative bg-gradient-to-r from-blue-600 to-purple-700">

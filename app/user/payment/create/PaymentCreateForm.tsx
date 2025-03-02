@@ -332,11 +332,7 @@ export function PaymentCreateForm({
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="webhookUrl">Webhook URL</Label>
-          <Input {...register("webhookUrl")} placeholder="Webhook URL" />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="redirectUrl">redirect ur URL</Label>
+          <Label htmlFor="redirectUrl">redirect URL</Label>
           <Input
             {...register("redirectUrl")}
             id="redirectUrl"
@@ -346,14 +342,6 @@ export function PaymentCreateForm({
         <div className="space-y-2">
           <Label htmlFor="webhookUrl">Webhook URL</Label>
           <Input {...register("webhookUrl")} placeholder="Webhook URL" />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="redirectUrl">redirect ur URL</Label>
-          <Input
-            {...register("redirectUrl")}
-            id="redirectUrl"
-            placeholder="redirect URL"
-          />
         </div>
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? (
