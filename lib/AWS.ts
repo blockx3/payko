@@ -11,7 +11,7 @@ export async function Deletes3image({ key }: { key: string }) {
   try {
     await s3Client.send(
       new DeleteObjectCommand({
-        Bucket: "aaraz-main",
+        Bucket: "common-main",
         Key: key,
       }),
     );

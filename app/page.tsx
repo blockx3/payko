@@ -32,7 +32,7 @@ function Main() {
         className="absolute xl:top-0 bottom-0 right-0 -z-10 pointer-events-none"
       >
         <Image
-          src="https://static.aaraz.me/payko/abstract_obj.png"
+          src="https://res.cloudinary.com/dskezqfgk/image/upload/v1768043869/vecteezy_3d-abstract-colorful-twisted-liquid-shapes-creative-design_25199695_1_zvu5xp.png"
           alt="Decorative background"
           height={500}
           width={500}

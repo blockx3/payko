@@ -26,10 +26,10 @@ export async function UserTotalBalance({
   );
 
   const QueryURL = Supported_tokens.map((d) => d.token_mint).join(",");
-  const tokenPriceData = await fetch(
-    `https://api.jup.ag/price/v2?ids=${QueryURL}`,
-    { cache: "no-store" },
-  ).then((d) => d.json());
+  const tokenPriceData = fetch(
+    "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd",
+  );
+  const tokenPriceDataJson = await tokenPriceData.then((res) => res.json());
 
   const total_balance_promisses = Supported_tokens.map(async (token_detail) => {
     let balance = await getAssociateTokenBalance({
@@ -43,7 +43,9 @@ export async function UserTotalBalance({
         : 10 ** token_detail.decimal);
     // @ts-ignore
 
-    const price = balance * tokenPriceData.data[token_detail.token_mint]?.price;
+    console.log(token_detail.token_mint);
+
+    const price = balance * tokenPriceDataJson.solana.usd;
     return price;
   });
 

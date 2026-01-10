@@ -23,7 +23,7 @@ export default function AppBar() {
       <div className="flex items-center gap-2">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src={"https://static.aaraz.me/payko/logo.svg"}
+            src={"/logo-inline.svg"}
             alt="Logo"
             className="w-20"
             height={1000} // Arbitrary height

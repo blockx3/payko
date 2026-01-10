@@ -20,7 +20,7 @@ export async function GetPreSignedUrl({
   }
   const key = `payko/payment_details/icons/${fileName}`;
   const { url, fields } = await createPresignedPost(s3Client, {
-    Bucket: "aaraz-main",
+    Bucket: "common-main",
     Key: key,
     Conditions: [
       ["content-length-range", 0, 2 * 1024 * 1024], // 2 MB max

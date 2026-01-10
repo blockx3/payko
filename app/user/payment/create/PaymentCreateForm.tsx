@@ -64,9 +64,7 @@ export function PaymentCreateForm({
     resolver: zodResolver(Payment_details_Schema),
   });
   const [file, setFile] = useState<File | null>(null);
-  const [iconUrl, setIconUrl] = useState(
-    "https://static.aaraz.me/payko/money.png",
-  );
+  const [iconUrl, setIconUrl] = useState("");
   const onSubmit: SubmitHandler<Inputs> = async (InputFormData) => {
     let PaymentIconUrl = iconUrl;
     if (file) {
@@ -98,7 +96,7 @@ export function PaymentCreateForm({
         const imageLocation =
           xmlDoc.getElementsByTagName("Location")[0]?.childNodes[0]?.nodeValue;
         let IMGURL = new URL(imageLocation as string);
-        IMGURL.hostname = "dalrhzyq3imlu.cloudfront.net";
+        IMGURL.hostname = "d3m6efai1hl4io.cloudfront.net";
         PaymentIconUrl = decodeURIComponent(IMGURL.toString());
       }
     }
